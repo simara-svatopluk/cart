@@ -27,6 +27,16 @@ class ItemTest extends TestCase
         Assert::assertEquals($expected, $item->toDetail());
     }
 
+    public function testChangeAmount()
+    {
+        $item = new Item('x', new Price(5.0), 2);
+        $item->changeAmount(1);
+
+        $expected = new DetailItem('x', new Price(5.0), 1);
+
+        Assert::assertEquals($expected, $item->toDetail());
+    }
+
     public function testInitialAmountCannotBeNegative()
     {
         $this->expectException(AmountMustBePositiveException::class);
@@ -51,5 +61,19 @@ class ItemTest extends TestCase
         $this->expectException(AmountMustBePositiveException::class);
         $item = new Item('x', new Price(5.0), 1);
         $item->add(0);
+    }
+
+    public function testChangeToNegativeThrowsException()
+    {
+        $this->expectException(AmountMustBePositiveException::class);
+        $item = new Item('x', new Price(5.0), 1);
+        $item->changeAmount(-1);
+    }
+
+    public function testChangeToZeroThrowsException()
+    {
+        $this->expectException(AmountMustBePositiveException::class);
+        $item = new Item('x', new Price(5.0), 1);
+        $item->changeAmount(0);
     }
 }
