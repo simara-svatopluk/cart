@@ -50,4 +50,10 @@ class Item
             throw new AmountMustBePositiveException();
         }
     }
+
+    public function changeAmount(int $amount)
+    {
+        $this->checkAmount($amount);
+        $this->amount = $amount;
+    }
 }
