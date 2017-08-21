@@ -33,6 +33,11 @@ class Item
         return new DetailItem($this->productId, $this->unitPrice, $this->amount);
     }
 
+    public function getProductId(): string
+    {
+        return $this->productId;
+    }
+
     public function add(int $amount)
     {
         $this->checkAmount($amount);

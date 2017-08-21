@@ -12,7 +12,12 @@ class Cart
 
     public function add(string $productId, Price $unitPrice, int $amount = 1)
     {
-        $this->items[] = new Item($productId, $unitPrice, $amount);
+        try {
+            $item = $this->find($productId);
+            $item->add($amount);
+        } catch (ProductNotInCartException $e) {
+            $this->items[] = new Item($productId, $unitPrice, $amount);
+        }
     }
 
     public function remove(string $productId)
@@ -34,5 +39,18 @@ class Cart
         }, 0.0);
 
         return new CartDetail($detailItems, new Price($totalPrice));
+    }
+
+    /**
+     * @throws ProductNotInCartException
+     */
+    private function find(string $productId): Item
+    {
+        foreach ($this->items as $item) {
+            if ($item->getProductId() === $productId) {
+                return $item;
+            }
+        }
+        throw new ProductNotInCartException();
     }
 }
