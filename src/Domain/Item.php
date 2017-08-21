@@ -29,5 +29,6 @@ class Item
 
     public function toDetail(): DetailItem
     {
+        return new DetailItem($this->productId, $this->unitPrice, $this->amount);
     }
 }
