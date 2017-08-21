@@ -19,5 +19,6 @@ class Cart
 
     public function calculate(): CartDetail
     {
+        return new CartDetail([], new Price(0.0));
     }
 }
