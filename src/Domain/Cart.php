@@ -38,11 +38,13 @@ class Cart
             return $item->toDetail();
         }, $this->items);
 
-        $totalPrice = array_reduce($detailItems, function (float $carry, DetailItem $item) {
-            return $carry + $item->getPrice()->getWithVat() * $item->getAmount();
-        }, 0.0);
+        $prices = array_map(function (Item $item): Price {
+            return $item->calculatePrice();
+        }, $this->items);
 
-        return new CartDetail(array_values($detailItems), new Price($totalPrice));
+        $totalPrice = Price::sum($prices);
+
+        return new CartDetail(array_values($detailItems), $totalPrice);
     }
 
     /**

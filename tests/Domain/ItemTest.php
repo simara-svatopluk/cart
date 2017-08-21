@@ -76,4 +76,13 @@ class ItemTest extends TestCase
         $item = new Item('x', new Price(5.0), 1);
         $item->changeAmount(0);
     }
+
+    public function testCalculateTotalPrice()
+    {
+        $item = new Item('x', new Price(5.0), 3);
+        $price = $item->calculatePrice();
+
+        $expected = new Price(15.0);
+        Assert::assertEquals($expected, $price);
+    }
 }

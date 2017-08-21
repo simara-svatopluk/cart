@@ -56,4 +56,9 @@ class Item
         $this->checkAmount($amount);
         $this->amount = $amount;
     }
+
+    public function calculatePrice(): Price
+    {
+        return $this->unitPrice->multiply($this->amount);
+    }
 }
