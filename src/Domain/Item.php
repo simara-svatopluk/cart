@@ -31,4 +31,8 @@ class Item
     {
         return new DetailItem($this->productId, $this->unitPrice, $this->amount);
     }
+
+    public function add(int $amount)
+    {
+    }
 }
