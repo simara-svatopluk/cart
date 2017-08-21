@@ -54,4 +54,37 @@ class CartTest extends TestCase
 
         Assert::assertEquals($expected, $cart->calculate());
     }
+
+    public function testRemoveNotExistingProductFromEmptyCart()
+    {
+        $this->expectException(ProductNotInCartException::class);
+
+        $cart = new Cart();
+        $cart->remove('x');
+    }
+
+    public function testRemoveNotExistingProduct()
+    {
+        $this->expectException(ProductNotInCartException::class);
+
+        $cart = new Cart();
+        $cart->add('a', new Price(10.0));
+        $cart->remove('x');
+    }
+
+    public function testRemoveProduct()
+    {
+        $cart = new Cart();
+        $cart->add('a', new Price(10.0));
+        $cart->add('b', new Price(20.0), 2);
+
+        $cart->remove('a');
+
+        $expectedItems = [
+            new DetailItem('b', new Price(20.0), 2),
+        ];
+        $expected = new CartDetail($expectedItems, new Price(40.0));
+
+        Assert::assertEquals($expected, $cart->calculate());
+    }
 }
