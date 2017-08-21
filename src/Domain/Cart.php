@@ -22,6 +22,8 @@ class Cart
 
     public function remove(string $productId)
     {
+        $key = $this->findKey($productId);
+        unset($this->items[$key]);
     }
 
     public function changeAmount(string $productId, int $amount)
@@ -38,7 +40,7 @@ class Cart
             return $carry + $item->getPrice()->getWithVat() * $item->getAmount();
         }, 0.0);
 
-        return new CartDetail($detailItems, new Price($totalPrice));
+        return new CartDetail(array_values($detailItems), new Price($totalPrice));
     }
 
     /**
@@ -49,6 +51,19 @@ class Cart
         foreach ($this->items as $item) {
             if ($item->getProductId() === $productId) {
                 return $item;
+            }
+        }
+        throw new ProductNotInCartException();
+    }
+
+    /**
+     * @throws ProductNotInCartException
+     */
+    private function findKey(string $productId)
+    {
+        foreach ($this->items as $key => $item) {
+            if ($item->getProductId() === $productId) {
+                return $key;
             }
         }
         throw new ProductNotInCartException();
