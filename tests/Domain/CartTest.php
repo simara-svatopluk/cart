@@ -42,4 +42,16 @@ class CartTest extends TestCase
 
         Assert::assertEquals($expected, $cart->calculate());
     }
+
+    public function testAddSameProductIncrementAmountOnly()
+    {
+        $cart = new Cart();
+        $cart->add('a', new Price(10.0));
+        $cart->add('a', new Price(0.0));
+
+        $expectedItem = new DetailItem('a', new Price(10.0), 2);
+        $expected = new CartDetail([$expectedItem], new Price(20.0));
+
+        Assert::assertEquals($expected, $cart->calculate());
+    }
 }
