@@ -28,6 +28,8 @@ class Cart
 
     public function changeAmount(string $productId, int $amount)
     {
+        $item = $this->find($productId);
+        $item->changeAmount($amount);
     }
 
     public function calculate(): CartDetail
