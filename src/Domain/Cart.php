@@ -6,9 +6,19 @@ class Cart
 {
 
     /**
+     * @var string
+     */
+    private $id;
+
+    /**
      * @var Item[]
      */
     private $items = [];
+
+    public function __construct(string $id)
+    {
+        $this->id = $id;
+    }
 
     public function add(string $productId, Price $unitPrice, int $amount = 1): void
     {
@@ -77,5 +87,10 @@ class Cart
             }
         }
         throw new ProductNotInCartException();
+    }
+
+    public function getId(): string
+    {
+        return $this->id;
     }
 }

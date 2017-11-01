@@ -10,7 +10,7 @@ class CartTest extends TestCase
 
     public function testCalculateEmptyCart()
     {
-        $cart = new Cart;
+        $cart = new Cart('1');
 
         $expected = new CartDetail([], new Price(0.0));
 
@@ -19,7 +19,7 @@ class CartTest extends TestCase
 
     public function testAddSingleProductToEmpty()
     {
-        $cart = new Cart();
+        $cart = new Cart('1');
         $cart->add('a', new Price(10.0));
 
         $expectedItem = new ItemDetail('a', new Price(10.0), 1);
@@ -30,7 +30,7 @@ class CartTest extends TestCase
 
     public function testAddTwoDifferentProducts()
     {
-        $cart = new Cart();
+        $cart = new Cart('1');
         $cart->add('a', new Price(10.0));
         $cart->add('b', new Price(20.0), 2);
 
@@ -45,7 +45,7 @@ class CartTest extends TestCase
 
     public function testAddSameProductIncrementAmountOnly()
     {
-        $cart = new Cart();
+        $cart = new Cart('1');
         $cart->add('a', new Price(10.0));
         $cart->add('a', new Price(0.0));
 
@@ -59,7 +59,7 @@ class CartTest extends TestCase
     {
         $this->expectException(ProductNotInCartException::class);
 
-        $cart = new Cart();
+        $cart = new Cart('1');
         $cart->remove('x');
     }
 
@@ -67,14 +67,14 @@ class CartTest extends TestCase
     {
         $this->expectException(ProductNotInCartException::class);
 
-        $cart = new Cart();
+        $cart = new Cart('1');
         $cart->add('a', new Price(10.0));
         $cart->remove('x');
     }
 
     public function testRemoveProduct()
     {
-        $cart = new Cart();
+        $cart = new Cart('1');
         $cart->add('a', new Price(10.0));
         $cart->add('b', new Price(20.0), 2);
 
@@ -92,7 +92,7 @@ class CartTest extends TestCase
     {
         $this->expectException(ProductNotInCartException::class);
 
-        $cart = new Cart();
+        $cart = new Cart('1');
         $cart->add('a', new Price(10.0));
 
         $cart->changeAmount('x', 5);
@@ -100,7 +100,7 @@ class CartTest extends TestCase
 
     public function testChangeAmount()
     {
-        $cart = new Cart();
+        $cart = new Cart('1');
         $cart->add('a', new Price(10.0));
         $cart->changeAmount('a', 5);
 
@@ -108,5 +108,11 @@ class CartTest extends TestCase
         $expected = new CartDetail([$expectedItem], new Price(50.0));
 
         Assert::assertEquals($expected, $cart->calculate());
+    }
+
+    public function testGetGetId()
+    {
+        $cart = new Cart('1');
+        Assert::assertSame('1', $cart->getId());
     }
 }
