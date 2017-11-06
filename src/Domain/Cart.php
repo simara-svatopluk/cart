@@ -30,7 +30,7 @@ class Cart
             $item = $this->find($productId);
             $item->add($amount);
         } catch (ProductNotInCartException $e) {
-            $this->items[] = new Item($productId, $unitPrice, $amount);
+            $this->items->add(new Item($productId, $unitPrice, $amount));
         }
     }
 
@@ -40,7 +40,7 @@ class Cart
     public function remove(string $productId): void
     {
         $key = $this->findKey($productId);
-        unset($this->items[$key]);
+        $this->items->remove($key);
     }
 
     /**
