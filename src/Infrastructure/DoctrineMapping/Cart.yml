@@ -1,0 +1,19 @@
+Simara\Cart\Domain\Cart:
+  type: entity
+
+  id:
+    id:
+      type: string
+
+  manyToMany:
+    items:
+      cascade: [all]
+      targetEntity: Item
+      joinTable:
+        name: cart_item
+        joinColumns:
+          cart_id:
+            referencedColumnName: id
+        inverseJoinColumns:
+          item_id:
+            referencedColumnName: generatedId

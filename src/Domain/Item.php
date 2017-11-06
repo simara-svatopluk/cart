@@ -5,6 +5,8 @@ namespace Simara\Cart\Domain;
 class Item
 {
 
+    private $generatedId;
+
     /**
      * @var string
      */
