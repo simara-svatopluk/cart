@@ -14,6 +14,8 @@ Simara\Cart\Domain\Cart:
         joinColumns:
           cart_id:
             referencedColumnName: id
+            onDelete: CASCADE
         inverseJoinColumns:
           item_id:
             referencedColumnName: generatedId
+            onDelete: CASCADE

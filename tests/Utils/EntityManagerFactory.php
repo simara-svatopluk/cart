@@ -2,7 +2,8 @@
 
 namespace Simara\Cart\Utils;
 
-use Doctrine\DBAL\Driver\PDOSqlite\Driver;
+use Doctrine\DBAL\Connection;
+use Doctrine\DBAL\Driver\PDOSqlite\Driver as SqliteDriver;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver;
@@ -11,7 +12,17 @@ use Doctrine\ORM\Tools\SchemaTool;
 
 final class EntityManagerFactory
 {
-    public static function getSqliteMemoryEntityManager(array $schemaClassNames): EntityManager
+
+    public static function createSqliteMemoryEntityManager(array $schemaClassNames): EntityManager
+    {
+        $connection = new Connection([
+            'memory' => true,
+        ], new SqliteDriver());
+
+        return self::createEntityManager($connection, $schemaClassNames);
+    }
+
+    public static function createEntityManager(Connection $connection, array $schemaClassNames): EntityManager
     {
         $config = new Configuration();
 
@@ -26,13 +37,7 @@ final class EntityManagerFactory
         $config->setProxyNamespace('Doctrine\Tests\Proxies');
         $config->setAutoGenerateProxyClasses(ProxyFactory::AUTOGENERATE_NEVER);
 
-        $entityManager = EntityManager::create(
-            [
-                'driverClass' => Driver::class,
-                'memory' => true,
-            ],
-            $config
-        );
+        $entityManager = EntityManager::create($connection, $config);
 
         (new SchemaTool($entityManager))
             ->createSchema(array_map([$entityManager, 'getClassMetadata'], $schemaClassNames));

@@ -1,4 +1,11 @@
 <phpunit bootstrap="vendor/autoload.php">
+	<php>
+		<var name="DB_DRIVER" value="pdo_pgsql" />
+		<var name="DB_USER" value="user" />
+		<var name="DB_PASSWORD" value="***" />
+		<var name="DB_DBNAME" value="cart_test" />
+		<var name="DB_HOST" value="localhost" />
+	</php>
 	<testsuites>
 		<testsuite name="Cart">
 			<directory>tests</directory>

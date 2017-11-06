@@ -7,10 +7,10 @@ use Simara\Cart\Domain\Cart;
 use Simara\Cart\Domain\CartRepository;
 use Simara\Cart\Domain\Item;
 use Simara\Cart\Utils\EntityManagerFactory;
+use Simara\Cart\Utils\ConnectionManager;
 
 class DoctrineCartRepositoryTest extends CartRepositoryTest
 {
-
     /**
      * @var EntityManager
      */
@@ -29,7 +29,15 @@ class DoctrineCartRepositoryTest extends CartRepositoryTest
 
     protected function setUp()
     {
-        $this->entityManager = EntityManagerFactory::getSqliteMemoryEntityManager([Cart::class, Item::class]);
+        ConnectionManager::dropAndCreateDatabase();
+        $connection = ConnectionManager::createConnection();
+        $this->entityManager = EntityManagerFactory::createEntityManager($connection, [Cart::class, Item::class]);
         parent::setUp();
+    }
+
+    protected function tearDown()
+    {
+        parent::tearDown();
+        $this->entityManager->getConnection()->close();
     }
 }
