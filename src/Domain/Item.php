@@ -38,20 +38,20 @@ class Item
         return $this->productId;
     }
 
-    public function add(int $amount)
+    public function add(int $amount): void
     {
         $this->checkAmount($amount);
         $this->amount = $this->amount + $amount;
     }
 
-    private function checkAmount(int $amount)
+    private function checkAmount(int $amount): void
     {
         if ($amount <= 0) {
             throw new AmountMustBePositiveException();
         }
     }
 
-    public function changeAmount(int $amount)
+    public function changeAmount(int $amount): void
     {
         $this->checkAmount($amount);
         $this->amount = $amount;

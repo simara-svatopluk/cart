@@ -10,7 +10,7 @@ class Cart
      */
     private $items = [];
 
-    public function add(string $productId, Price $unitPrice, int $amount = 1)
+    public function add(string $productId, Price $unitPrice, int $amount = 1): void
     {
         try {
             $item = $this->find($productId);
@@ -20,13 +20,13 @@ class Cart
         }
     }
 
-    public function remove(string $productId)
+    public function remove(string $productId): void
     {
         $key = $this->findKey($productId);
         unset($this->items[$key]);
     }
 
-    public function changeAmount(string $productId, int $amount)
+    public function changeAmount(string $productId, int $amount): void
     {
         $item = $this->find($productId);
         $item->changeAmount($amount);
@@ -63,7 +63,7 @@ class Cart
     /**
      * @throws ProductNotInCartException
      */
-    private function findKey(string $productId)
+    private function findKey(string $productId): string
     {
         foreach ($this->items as $key => $item) {
             if ($item->getProductId() === $productId) {
