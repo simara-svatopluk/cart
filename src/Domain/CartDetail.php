@@ -6,7 +6,7 @@ class CartDetail
 {
 
     /**
-     * @var DetailItem[]
+     * @var ItemDetail[]
      */
     private $items;
 
@@ -22,7 +22,7 @@ class CartDetail
     }
 
     /**
-     * @return DetailItem[]
+     * @return ItemDetail[]
      */
     public function getItems(): array
     {

@@ -22,7 +22,7 @@ class CartTest extends TestCase
         $cart = new Cart();
         $cart->add('a', new Price(10.0));
 
-        $expectedItem = new DetailItem('a', new Price(10.0), 1);
+        $expectedItem = new ItemDetail('a', new Price(10.0), 1);
         $expected = new CartDetail([$expectedItem], new Price(10.0));
 
         Assert::assertEquals($expected, $cart->calculate());
@@ -35,8 +35,8 @@ class CartTest extends TestCase
         $cart->add('b', new Price(20.0), 2);
 
         $expectedItems = [
-            new DetailItem('a', new Price(10.0), 1),
-            new DetailItem('b', new Price(20.0), 2),
+            new ItemDetail('a', new Price(10.0), 1),
+            new ItemDetail('b', new Price(20.0), 2),
         ];
         $expected = new CartDetail($expectedItems, new Price(50.0));
 
@@ -49,7 +49,7 @@ class CartTest extends TestCase
         $cart->add('a', new Price(10.0));
         $cart->add('a', new Price(0.0));
 
-        $expectedItem = new DetailItem('a', new Price(10.0), 2);
+        $expectedItem = new ItemDetail('a', new Price(10.0), 2);
         $expected = new CartDetail([$expectedItem], new Price(20.0));
 
         Assert::assertEquals($expected, $cart->calculate());
@@ -81,7 +81,7 @@ class CartTest extends TestCase
         $cart->remove('a');
 
         $expectedItems = [
-            new DetailItem('b', new Price(20.0), 2),
+            new ItemDetail('b', new Price(20.0), 2),
         ];
         $expected = new CartDetail($expectedItems, new Price(40.0));
 
@@ -104,7 +104,7 @@ class CartTest extends TestCase
         $cart->add('a', new Price(10.0));
         $cart->changeAmount('a', 5);
 
-        $expectedItem = new DetailItem('a', new Price(10.0), 5);
+        $expectedItem = new ItemDetail('a', new Price(10.0), 5);
         $expected = new CartDetail([$expectedItem], new Price(50.0));
 
         Assert::assertEquals($expected, $cart->calculate());

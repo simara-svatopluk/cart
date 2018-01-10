@@ -28,9 +28,9 @@ class Item
         $this->unitPrice = $unitPrice;
     }
 
-    public function toDetail(): DetailItem
+    public function toDetail(): ItemDetail
     {
-        return new DetailItem($this->productId, $this->unitPrice, $this->amount);
+        return new ItemDetail($this->productId, $this->unitPrice, $this->amount);
     }
 
     public function getProductId(): string

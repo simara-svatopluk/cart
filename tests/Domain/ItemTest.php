@@ -12,7 +12,7 @@ class ItemTest extends TestCase
     {
         $item = new Item('x', new Price(5.0), 2);
 
-        $expected = new DetailItem('x', new Price(5.0), 2);
+        $expected = new ItemDetail('x', new Price(5.0), 2);
 
         Assert::assertEquals($expected, $item->toDetail());
     }
@@ -22,7 +22,7 @@ class ItemTest extends TestCase
         $item = new Item('x', new Price(5.0), 2);
         $item->add(5);
 
-        $expected = new DetailItem('x', new Price(5.0), 7);
+        $expected = new ItemDetail('x', new Price(5.0), 7);
 
         Assert::assertEquals($expected, $item->toDetail());
     }
@@ -32,7 +32,7 @@ class ItemTest extends TestCase
         $item = new Item('x', new Price(5.0), 2);
         $item->changeAmount(1);
 
-        $expected = new DetailItem('x', new Price(5.0), 1);
+        $expected = new ItemDetail('x', new Price(5.0), 1);
 
         Assert::assertEquals($expected, $item->toDetail());
     }

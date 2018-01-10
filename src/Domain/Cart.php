@@ -34,7 +34,7 @@ class Cart
 
     public function calculate(): CartDetail
     {
-        $detailItems = array_map(function (Item $item): DetailItem {
+        $detailItems = array_map(function (Item $item): ItemDetail {
             return $item->toDetail();
         }, $this->items);
 

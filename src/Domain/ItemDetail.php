@@ -2,7 +2,7 @@
 
 namespace Simara\Cart\Domain;
 
-class DetailItem
+class ItemDetail
 {
 
     /**
