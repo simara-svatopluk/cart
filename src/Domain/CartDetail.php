@@ -15,6 +15,10 @@ class CartDetail
      */
     private $totalPrice;
 
+    /**
+     * @param $items ItemDetail[]
+     * @param $totalPrice Price
+     */
     public function __construct(array $items, Price $totalPrice)
     {
         $this->items = $items;
