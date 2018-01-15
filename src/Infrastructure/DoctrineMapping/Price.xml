@@ -1,0 +1,5 @@
+<doctrine-mapping>
+    <embeddable name="Simara\Cart\Domain\Price">
+        <field name="withVat" type="float" />
+    </embeddable>
+</doctrine-mapping>

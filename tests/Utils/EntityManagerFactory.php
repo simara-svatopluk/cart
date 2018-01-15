@@ -6,7 +6,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver\PDOSqlite\Driver as SqliteDriver;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
-use Doctrine\ORM\Mapping\Driver\SimplifiedYamlDriver;
+use Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver;
 use Doctrine\ORM\Proxy\ProxyFactory;
 use Doctrine\ORM\Tools\SchemaTool;
 
@@ -29,11 +29,11 @@ final class EntityManagerFactory
         $namespaces = [
             __DIR__ . '/../../src/Infrastructure/DoctrineMapping' => 'Simara\\Cart\\Domain'
         ];
-        $yamlDriver = new SimplifiedYamlDriver($namespaces, '.yml');
+        $xmlDrive = new SimplifiedXmlDriver($namespaces, '.xml');
 
-        $config->setMetadataDriverImpl($yamlDriver);
+        $config->setMetadataDriverImpl($xmlDrive);
 
-        $config->setProxyDir(__DIR__ . '/../Tests/Proxies');
+        $config->setProxyDir(__DIR__);
         $config->setProxyNamespace('Doctrine\Tests\Proxies');
         $config->setAutoGenerateProxyClasses(ProxyFactory::AUTOGENERATE_NEVER);
 

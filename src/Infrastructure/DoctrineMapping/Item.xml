@@ -1,0 +1,12 @@
+<doctrine-mapping>
+    <entity name="Simara\Cart\Domain\Item">
+        <id name="generatedId" type="integer">
+            <generator strategy="AUTO" />
+        </id>
+
+        <field name="productId" type="string" />
+        <field name="amount" type="integer" />
+
+        <embedded name="unitPrice" class="Price" />
+    </entity>
+</doctrine-mapping>
