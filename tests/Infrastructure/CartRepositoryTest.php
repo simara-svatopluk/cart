@@ -35,7 +35,7 @@ abstract class CartRepositoryTest extends TestCase
         return $cart;
     }
 
-    protected function flush()
+    protected function flush(): void
     {
     }
 
@@ -69,7 +69,7 @@ abstract class CartRepositoryTest extends TestCase
         Assert::assertEquals($this->getCartDetailWithItem(), $found->calculate());
     }
 
-    public function testFlushChangedPersists()
+    public function testFlushAddedItemPersists()
     {
         $empty = $this->createEmptyCart('1');
         $this->repository->add($empty);
@@ -81,6 +81,20 @@ abstract class CartRepositoryTest extends TestCase
 
         $found = $this->repository->get('1');
         Assert::assertEquals($this->getCartDetailWithItem(), $found->calculate());
+    }
+
+    public function testFlushRemovedItemPersists()
+    {
+        $empty = $this->createCartWithItem('1');
+        $this->repository->add($empty);
+        $this->flush();
+
+        $foundEmpty = $this->repository->get('1');
+        $foundEmpty->remove('1');
+        $this->flush();
+
+        $found = $this->repository->get('1');
+        Assert::assertEquals($this->getEmptyCartDetail(), $found->calculate());
     }
 
     private function createEmptyCart(string $id): Cart
