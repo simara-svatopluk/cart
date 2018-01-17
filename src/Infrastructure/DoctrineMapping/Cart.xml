@@ -8,7 +8,7 @@
             </cascade>
             <join-table name="cart_item">
                 <join-columns>
-                    <join-column name="cart_id" referenced-column-name="id" on-delete="CASCADE" />
+                    <join-column name="cart_id" referenced-column-name="id"/>
                 </join-columns>
                 <inverse-join-columns>
                     <join-column name="item_id" referenced-column-name="generatedId" on-delete="CASCADE" />
