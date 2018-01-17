@@ -21,7 +21,7 @@ class DoctrineCartRepositoryTest extends CartRepositoryTest
         return new DoctrineCartRepository($this->entityManager);
     }
 
-    protected function flush()
+    protected function flush(): void
     {
         $this->entityManager->flush();
         $this->entityManager->clear();

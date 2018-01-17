@@ -26,7 +26,7 @@ class DoctrineCartRepository implements CartRepository
         $this->entityManger->persist($cart);
     }
 
-    private function find(string $id)
+    private function find(string $id): ?Cart
     {
         return $this->entityManger->find(Cart::class, $id);
     }
