@@ -6,6 +6,7 @@ use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver;
 use Doctrine\DBAL\Driver\PDOPgSql\Driver as PgSqlDriver;
 use Doctrine\DBAL\Driver\PDOMySql\Driver as MySqlDriver;
+use Doctrine\DBAL\Driver\PDOSqlite\Driver as SqliteDriver;
 
 class ConnectionManager
 {
@@ -72,5 +73,12 @@ class ConnectionManager
             'dbname' => self::getDbName(),
             'host' => self::getHost(),
         ], self::getDriver());
+    }
+
+    public static function createSqliteMemoryConnection(): Connection
+    {
+        return new Connection([
+            'memory' => true,
+        ], new SqliteDriver());
     }
 }

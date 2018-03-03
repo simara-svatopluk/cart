@@ -3,7 +3,6 @@
 namespace Simara\Cart\Utils;
 
 use Doctrine\DBAL\Connection;
-use Doctrine\DBAL\Driver\PDOSqlite\Driver as SqliteDriver;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\Mapping\Driver\SimplifiedXmlDriver;
@@ -12,16 +11,6 @@ use Doctrine\ORM\Tools\SchemaTool;
 
 final class EntityManagerFactory
 {
-
-    public static function createSqliteMemoryEntityManager(array $schemaClassNames): EntityManager
-    {
-        $connection = new Connection([
-            'memory' => true,
-        ], new SqliteDriver());
-
-        return self::createEntityManager($connection, $schemaClassNames);
-    }
-
     public static function createEntityManager(Connection $connection, array $schemaClassNames): EntityManager
     {
         $config = new Configuration();
