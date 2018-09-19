@@ -3,6 +3,7 @@
 namespace Simara\Cart\Infrastructure;
 
 use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\NoResultException;
 use Simara\Cart\Domain\Cart;
 use Simara\Cart\Domain\CartNotFoundException;
 use Simara\Cart\Domain\CartRepository;
@@ -26,28 +27,28 @@ class DoctrineCartRepository implements CartRepository
         $this->entityManger->persist($cart);
     }
 
-    private function find(string $id): ?Cart
-    {
-        return $this->entityManger->find(Cart::class, $id);
-    }
-
     public function get(string $id): Cart
     {
-        return $this->getThrowingException($id);
-    }
+        $queryBuilder = $this->entityManger->createQueryBuilder();
+        $queryBuilder
+            ->select('cart, items')
+            ->from(Cart::class, 'cart')
+            ->leftJoin('cart.items', 'items')
+            ->where('cart.id = :id')
+            ->setParameter(':id', $id);
 
-    private function getThrowingException(string $id): Cart
-    {
+        $query = $queryBuilder->getQuery();
+
         try {
-            return $this->find($id);
-        } catch (TypeError $e) {
+            return $query->getSingleResult();
+        } catch (NoResultException $e) {
             throw new CartNotFoundException();
         }
     }
 
     public function remove(string $id): void
     {
-        $cart = $this->getThrowingException($id);
+        $cart = $this->get($id);
         $this->entityManger->remove($cart);
     }
 }
