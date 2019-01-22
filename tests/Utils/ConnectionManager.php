@@ -7,6 +7,7 @@ use Doctrine\DBAL\Driver;
 use Doctrine\DBAL\Driver\PDOPgSql\Driver as PgSqlDriver;
 use Doctrine\DBAL\Driver\PDOMySql\Driver as MySqlDriver;
 use Doctrine\DBAL\Driver\PDOSqlite\Driver as SqliteDriver;
+use Exception;
 
 class ConnectionManager
 {
@@ -45,10 +46,10 @@ class ConnectionManager
         return $GLOBALS['DB_HOST'] ?? null;
     }
 
-    private static function getDriver(): ?Driver
+    private static function getDriver(): Driver
     {
         if (!isset($GLOBALS['DB_DRIVER'])) {
-            return null;
+            throw new Exception('Please set at least DB_DRIVER');
         }
 
         if ($GLOBALS['DB_DRIVER'] === 'pdo_pgsql') {
