@@ -8,6 +8,7 @@ use Simara\Cart\Domain\Cart;
 use Simara\Cart\Domain\CartRepository;
 use Simara\Cart\Domain\Item;
 use Simara\Cart\Domain\Price;
+use Simara\Cart\Infrastructure\DoctrineMapping\PriceType;
 use Simara\Cart\Utils\EntityManagerFactory;
 use Simara\Cart\Utils\ConnectionManager;
 
@@ -33,7 +34,9 @@ class DoctrineCartRepositoryTest extends CartRepositoryTest
     {
         ConnectionManager::dropAndCreateDatabase();
         $connection = ConnectionManager::createConnection();
-        $this->entityManager = EntityManagerFactory::createEntityManager($connection, [Cart::class, Item::class]);
+        $xmlMappedClasses = [Cart::class, Item::class];
+        $types = [PriceType::class => PriceType::NAME];
+        $this->entityManager = EntityManagerFactory::createEntityManager($connection, $xmlMappedClasses, $types);
         parent::setUp();
     }
 
