@@ -6,6 +6,7 @@ namespace Simara\Cart\Infrastructure\DoctrineMapping;
 
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Type;
+use Exception;
 use Simara\Cart\Domain\Price;
 
 class PriceType extends Type
@@ -14,18 +15,21 @@ class PriceType extends Type
 
     public function getSQLDeclaration(array $fieldDeclaration, AbstractPlatform $platform)
     {
-        return 'FLOAT';
+        return 'DECIMAL(8,2)';
     }
     public function convertToPHPValue($value, AbstractPlatform $platform)
     {
-        return new Price((float) $value);
+        if ($value === null) {
+            return null;
+        }
+        return new Price($value);
     }
     public function convertToDatabaseValue($value, AbstractPlatform $platform)
     {
-        if ($value instanceof Price) {
-            return (string) $value->getWithVat();
+        if (!$value instanceof Price) {
+            throw new Exception('Value must be type of Price');
         }
-        return $value;
+        return $value->getWithVat();
     }
     public function getName()
     {

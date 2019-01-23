@@ -31,7 +31,7 @@ abstract class CartRepositoryTest extends TestCase
     private function createCartWithItem(string $id): Cart
     {
         $cart = new Cart($id);
-        $cart->add('1', new Price(10), 1);
+        $cart->add('1', new Price("10"), 1);
         return $cart;
     }
 
@@ -41,8 +41,8 @@ abstract class CartRepositoryTest extends TestCase
 
     private function getCartDetailWithItem(): CartDetail
     {
-        $item = new ItemDetail('1', new Price(10), 1);
-        return new CartDetail([$item], new Price(10));
+        $item = new ItemDetail('1', new Price("10"), 1);
+        return new CartDetail([$item], new Price("10"));
     }
 
     public function testAddAndRemoveSuccessfully()
@@ -62,7 +62,7 @@ abstract class CartRepositoryTest extends TestCase
     {
         $empty = $this->createEmptyCart('1');
         $this->repository->add($empty);
-        $empty->add('1', new Price(10.0));
+        $empty->add('1', new Price("10.0"));
         $this->flush();
 
         $found = $this->repository->get('1');
@@ -76,7 +76,7 @@ abstract class CartRepositoryTest extends TestCase
         $this->flush();
 
         $foundEmpty = $this->repository->get('1');
-        $foundEmpty->add('1', new Price(10.0));
+        $foundEmpty->add('1', new Price("10.0"));
         $this->flush();
 
         $found = $this->repository->get('1');
@@ -104,7 +104,7 @@ abstract class CartRepositoryTest extends TestCase
 
     private function getEmptyCartDetail(): CartDetail
     {
-        return new CartDetail([], new Price(0));
+        return new CartDetail([], new Price("0"));
     }
 
     public function testGetNotExistingCauseException()
