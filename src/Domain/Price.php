@@ -2,23 +2,22 @@
 
 namespace Simara\Cart\Domain;
 
-use Money\Money;
-use Money\Number;
+use Litipk\BigNumbers\Decimal;
 
 class Price
 {
-    private const EURO_TO_CENTS_CONVERTING_BASE = -2;
-    private const CENTS_TO_EURO_CONVERTING_BASE = 2;
+    private const DECIMALS = 2;
 
     /**
-     * @var Money
+     * @var Decimal
      */
     private $withVat;
 
     public function __construct(string $withVat)
     {
-        $cents = $this->eurToCents($withVat);
-        $this->withVat = Money::EUR($cents);
+        $withHigherPrecision = Decimal::fromString($withVat, self::DECIMALS + 1);
+        $truncated = $withHigherPrecision->floor(self::DECIMALS);
+        $this->withVat = $truncated;
     }
 
     /**
@@ -34,42 +33,23 @@ class Price
 
     public function getWithVat(): string
     {
-        return $this->centsToEurs($this->withVat->getAmount());
+        return (string) $this->withVat->floor(self::DECIMALS);
     }
 
     public function add(self $adder): self
     {
         $withVat = $this->withVat->add($adder->withVat);
-        return self::fromMoney($withVat);
+        return self::fromDecimal($withVat);
     }
 
     public function multiply(int $multiplier): self
     {
-        $withVat = $this->withVat->multiply($multiplier);
-        return self::fromMoney($withVat);
+        $withVat = $this->withVat->mul(Decimal::fromInteger($multiplier));
+        return self::fromDecimal($withVat);
     }
 
-    private static function fromMoney(Money $withVat): self
+    private static function fromDecimal(Decimal $withVat): self
     {
-        $price = new self('0');
-        $price->withVat = $withVat;
-        return $price;
-    }
-
-    private function eurToCents(string $euros): string
-    {
-        $number = Number::fromString($euros);
-        return $number->base10(self::EURO_TO_CENTS_CONVERTING_BASE)->getIntegerPart();
-    }
-
-    private function centsToEurs(string $cents): string
-    {
-        $number = new Number($cents);
-        $inEuro = $number->base10(self::CENTS_TO_EURO_CONVERTING_BASE);
-        if ($inEuro->isInteger()) {
-            return $inEuro->getIntegerPart();
-        } else {
-            return $inEuro->getIntegerPart() . '.' . $inEuro->getFractionalPart();
-        }
+        return new self($withVat->floor(self::DECIMALS));
     }
 }
