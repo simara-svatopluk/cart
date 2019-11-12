@@ -8,8 +8,10 @@ use Simara\Cart\Domain\Cart;
 use Simara\Cart\Domain\CartDetail;
 use Simara\Cart\Domain\CartNotFoundException;
 use Simara\Cart\Domain\CartRepository;
+use Simara\Cart\Domain\ConstantPrices;
 use Simara\Cart\Domain\ItemDetail;
 use Simara\Cart\Domain\Price;
+use Simara\Cart\Domain\Prices;
 
 abstract class CartRepositoryTest extends TestCase
 {
@@ -25,13 +27,13 @@ abstract class CartRepositoryTest extends TestCase
         $this->flush();
 
         $foundCart = $this->repository->get('1');
-        Assert::assertEquals($this->getCartDetailWithItem(), $foundCart->calculate());
+        Assert::assertEquals($this->getCartDetailWithItem(), $foundCart->calculate($this->createConstantPrices("10.0")));
     }
 
     private function createCartWithItem(string $id): Cart
     {
         $cart = new Cart($id);
-        $cart->add('1', new Price("10"), 1);
+        $cart->add('1', 1);
         return $cart;
     }
 
@@ -62,11 +64,11 @@ abstract class CartRepositoryTest extends TestCase
     {
         $empty = $this->createEmptyCart('1');
         $this->repository->add($empty);
-        $empty->add('1', new Price("10.0"));
+        $empty->add('1');
         $this->flush();
 
         $found = $this->repository->get('1');
-        Assert::assertEquals($this->getCartDetailWithItem(), $found->calculate());
+        Assert::assertEquals($this->getCartDetailWithItem(), $found->calculate($this->createConstantPrices("10.0")));
     }
 
     public function testFlushAddedItemPersists()
@@ -76,11 +78,11 @@ abstract class CartRepositoryTest extends TestCase
         $this->flush();
 
         $foundEmpty = $this->repository->get('1');
-        $foundEmpty->add('1', new Price("10.0"));
+        $foundEmpty->add('1');
         $this->flush();
 
         $found = $this->repository->get('1');
-        Assert::assertEquals($this->getCartDetailWithItem(), $found->calculate());
+        Assert::assertEquals($this->getCartDetailWithItem(), $found->calculate($this->createConstantPrices("10.0")));
     }
 
     public function testFlushRemovedItemPersists()
@@ -94,7 +96,7 @@ abstract class CartRepositoryTest extends TestCase
         $this->flush();
 
         $found = $this->repository->get('1');
-        Assert::assertEquals($this->getEmptyCartDetail(), $found->calculate());
+        Assert::assertEquals($this->getEmptyCartDetail(), $found->calculate($this->createConstantPrices("10.0")));
     }
 
     private function createEmptyCart(string $id): Cart
@@ -130,10 +132,10 @@ abstract class CartRepositoryTest extends TestCase
         $this->flush();
 
         $foundEmpty = $this->repository->get('1');
-        Assert::assertEquals($this->getCartDetailWithItem(), $foundEmpty->calculate());
+        Assert::assertEquals($this->getCartDetailWithItem(), $foundEmpty->calculate($this->createConstantPrices("10.0")));
 
         $foundEmpty = $this->repository->get('2');
-        Assert::assertEquals($this->getEmptyCartDetail(), $foundEmpty->calculate());
+        Assert::assertEquals($this->getEmptyCartDetail(), $foundEmpty->calculate($this->createConstantPrices("10.0")));
     }
 
     protected function setUp()
@@ -142,4 +144,9 @@ abstract class CartRepositoryTest extends TestCase
     }
 
     abstract protected function createRepository(): CartRepository;
+
+	private function createConstantPrices(string $string): Prices
+	{
+		return new ConstantPrices(new Price($string));
+	}
 }

@@ -35,8 +35,7 @@ class DoctrineCartRepositoryTest extends CartRepositoryTest
         ConnectionManager::dropAndCreateDatabase();
         $connection = ConnectionManager::createConnection();
         $xmlMappedClasses = [Cart::class, Item::class];
-        $types = [PriceType::class => PriceType::NAME];
-        $this->entityManager = EntityManagerFactory::createEntityManager($connection, $xmlMappedClasses, $types);
+        $this->entityManager = EntityManagerFactory::createEntityManager($connection, $xmlMappedClasses, []);
         parent::setUp();
     }
 
@@ -49,7 +48,7 @@ class DoctrineCartRepositoryTest extends CartRepositoryTest
     public function testItemsAreRemovedWithCart()
     {
         $cart = new Cart('1');
-        $cart->add('1', new Price("10"), 1);
+        $cart->add('1', 1);
         $repository = $this->createRepository();
         $repository->add($cart);
         $this->flush();

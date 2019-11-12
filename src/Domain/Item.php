@@ -16,26 +16,19 @@ class Item
      * @var int
      */
     private $amount;
-
-    /**
-     * @var Price
-     */
-    private $unitPrice;
-
     /**
      * @throws AmountMustBePositiveException
      */
-    public function __construct(string $productId, Price $unitPrice, int $amount)
+    public function __construct(string $productId, int $amount)
     {
         $this->checkAmount($amount);
         $this->productId = $productId;
         $this->amount = $amount;
-        $this->unitPrice = $unitPrice;
     }
 
-    public function toDetail(): ItemDetail
+    public function toDetail(Prices $prices): ItemDetail
     {
-        return new ItemDetail($this->productId, $this->unitPrice, $this->amount);
+        return new ItemDetail($this->productId, $prices->unitPrice($this->productId), $this->amount);
     }
 
     public function getProductId(): string
@@ -71,8 +64,8 @@ class Item
         $this->amount = $amount;
     }
 
-    public function calculatePrice(): Price
+    public function calculatePrice(Prices $prices): Price
     {
-        return $this->unitPrice->multiply($this->amount);
+        return $prices->unitPrice($this->productId)->multiply($this->amount);
     }
 }

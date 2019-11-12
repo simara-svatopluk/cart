@@ -24,13 +24,13 @@ class Cart
         $this->items = new ArrayCollection();
     }
 
-    public function add(string $productId, Price $unitPrice, int $amount = 1): void
+    public function add(string $productId, int $amount = 1): void
     {
         try {
             $item = $this->find($productId);
             $item->add($amount);
         } catch (ProductNotInCartException $e) {
-            $this->items->add(new Item($productId, $unitPrice, $amount));
+            $this->items->add(new Item($productId, $amount));
         }
     }
 
@@ -52,17 +52,17 @@ class Cart
         $item->changeAmount($amount);
     }
 
-    public function calculate(): CartDetail
+    public function calculate(Prices $prices): CartDetail
     {
-        $detailItems = $this->items->map(function (Item $item): ItemDetail {
-            return $item->toDetail();
+        $detailItems = $this->items->map(function (Item $item) use ($prices): ItemDetail {
+            return $item->toDetail($prices);
         })->getValues();
 
-        $prices = $this->items->map(function (Item $item): Price {
-            return $item->calculatePrice();
+        $itemPrices = $this->items->map(function (Item $item) use ($prices): Price {
+            return $item->calculatePrice($prices);
         })->getValues();
 
-        $totalPrice = Price::sum($prices);
+        $totalPrice = Price::sum($itemPrices);
 
         return new CartDetail(array_values($detailItems), $totalPrice);
     }

@@ -6,7 +6,5 @@
 
         <field name="productId" type="string" />
         <field name="amount" type="integer" />
-
-        <field name="unitPrice" type="priceType" />
     </entity>
 </doctrine-mapping>
