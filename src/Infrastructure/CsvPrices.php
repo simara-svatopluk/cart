@@ -10,26 +10,39 @@ use Simara\Cart\Domain\Prices;
 final class CsvPrices implements Prices
 {
 	/**
+	 * @var string
+	 */
+	private $filename;
+
+	/**
 	 * @var Price[]|array<string, Price>
 	 */
-	private $prices;
+	private $prices = [];
 
 	public function __construct(string $filename)
 	{
-		$handle = \fopen($filename, 'r');
-		while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
-			$id = $data[0];
-			$price = new Price($data[1]);
-			$this->prices[$id] = $price;
-		}
-		fclose($handle);
+		$this->filename = $filename;
 	}
 
 	public function unitPrice(string $productId): Price
 	{
+		$this->loadPrices();
 		if (!isset ($this->prices[$productId])) {
 			throw new PriceNotFoundException();
 		}
 		return $this->prices[$productId];
+	}
+
+	private function loadPrices()
+	{
+		if ($this->prices === []) {
+			$handle = \fopen($this->filename, 'r');
+			while (($data = fgetcsv($handle, 1000, ",")) !== FALSE) {
+				$id = $data[0];
+				$price = new Price($data[1]);
+				$this->prices[$id] = $price;
+			}
+			fclose($handle);
+		}
 	}
 }
