@@ -5,5 +5,8 @@ namespace Simara\Cart\Domain;
 
 interface Prices
 {
+	/**
+	 * @throws PriceNotFoundException
+	 */
 	public function unitPrice(string $productId): Price;
 }
