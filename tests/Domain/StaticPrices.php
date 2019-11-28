@@ -8,7 +8,7 @@ final class StaticPrices implements Prices
 	/**
 	 * @var Price[]|array<string, Price>
 	 */
-	private $prices;
+	private array $prices;
 
 	public function __construct($prices)
 	{

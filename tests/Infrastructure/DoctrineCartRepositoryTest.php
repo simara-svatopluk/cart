@@ -14,10 +14,7 @@ use Simara\Cart\Utils\ConnectionManager;
 
 class DoctrineCartRepositoryTest extends CartRepositoryTest
 {
-    /**
-     * @var EntityManager
-     */
-    private $entityManager;
+    private EntityManager $entityManager;
 
     protected function createRepository(): CartRepository
     {

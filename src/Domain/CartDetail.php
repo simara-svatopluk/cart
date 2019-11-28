@@ -8,16 +8,12 @@ class CartDetail
     /**
      * @var ItemDetail[]
      */
-    private $items;
+    private array $items;
 
-    /**
-     * @var Price
-     */
-    private $totalPrice;
+    private Price $totalPrice;
 
     /**
      * @param ItemDetail[] $items
-     * @param Price $totalPrice
      */
     public function __construct(array $items, Price $totalPrice)
     {

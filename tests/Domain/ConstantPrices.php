@@ -5,10 +5,7 @@ namespace Simara\Cart\Domain;
 
 final class ConstantPrices implements Prices
 {
-	/**
-	 * @var Price
-	 */
-	private $price;
+	private Price $price;
 
 	public function __construct(Price $price)
 	{

@@ -9,7 +9,7 @@
 		}
 	],
 	"require": {
-		"php": "^7.1",
+		"php": "^7.4",
 		"doctrine/orm": "^2.5",
 		"litipk/php-bignumbers": "^0.8"
 	},

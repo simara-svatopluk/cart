@@ -15,10 +15,7 @@ use Simara\Cart\Domain\Prices;
 
 abstract class CartRepositoryTest extends TestCase
 {
-    /**
-     * @var CartRepository
-     */
-    private $repository;
+    private CartRepository $repository;
 
     public function testAddAndGetSuccessfully()
     {

@@ -11,11 +11,7 @@ use Exception;
 
 class ConnectionManager
 {
-
-    /**
-     * @var Connection
-     */
-    private static $connectionForCreatingDatabases;
+    private static ?Connection $connectionForCreatingDatabases = null;
 
     public static function dropAndCreateDatabase(): void
     {

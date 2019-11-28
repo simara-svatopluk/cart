@@ -4,21 +4,11 @@ namespace Simara\Cart\Domain;
 
 class ItemDetail
 {
+    private string $productId;
 
-    /**
-     * @var string
-     */
-    private $productId;
+    private Price $price;
 
-    /**
-     * @var Price
-     */
-    private $price;
-
-    /**
-     * @var int
-     */
-    private $amount;
+    private int $amount;
 
     public function __construct(string $productId, Price $price, int $amount)
     {

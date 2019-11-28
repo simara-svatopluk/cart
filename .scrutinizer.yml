@@ -1,5 +1,6 @@
 build:
     environment:
+            php: 7.4.0
             postgresql: true
     tests:
         override:

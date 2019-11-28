@@ -11,11 +11,7 @@ use TypeError;
 
 class DoctrineCartRepository implements CartRepository
 {
-
-    /**
-     * @var EntityManager
-     */
-    private $entityManger;
+    private EntityManager $entityManger;
 
     public function __construct(EntityManager $entityManger)
     {

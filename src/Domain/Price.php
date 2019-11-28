@@ -8,10 +8,7 @@ class Price
 {
     private const DECIMALS = 2;
 
-    /**
-     * @var Decimal
-     */
-    private $withVat;
+    private Decimal $withVat;
 
     public function __construct(string $withVat)
     {
@@ -26,9 +23,11 @@ class Price
      */
     public static function sum(array $prices): self
     {
-        return array_reduce($prices, function (self $carry, self $price) {
-            return $carry->add($price);
-        }, new self('0'));
+        return array_reduce(
+        	$prices,
+			fn(self $carry, self $price) => $carry->add($price),
+			new self('0')
+		);
     }
 
     public function getWithVat(): string

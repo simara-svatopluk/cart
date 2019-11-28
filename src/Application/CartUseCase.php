@@ -11,15 +11,9 @@ use Simara\Cart\Domain\Prices;
 
 final class CartUseCase
 {
-	/**
-	 * @var CartRepository
-	 */
-	private $repository;
+	private CartRepository $repository;
 
-	/**
-	 * @var Prices
-	 */
-	private $prices;
+	private Prices $prices;
 
 	public function __construct(CartRepository $repository, Prices $prices)
 	{

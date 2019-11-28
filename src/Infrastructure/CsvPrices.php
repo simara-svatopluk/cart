@@ -9,15 +9,12 @@ use Simara\Cart\Domain\Prices;
 
 final class CsvPrices implements Prices
 {
-	/**
-	 * @var string
-	 */
-	private $filename;
+	private string $filename;
 
 	/**
 	 * @var Price[]|array<string, Price>
 	 */
-	private $prices = [];
+	private array $prices = [];
 
 	public function __construct(string $filename)
 	{

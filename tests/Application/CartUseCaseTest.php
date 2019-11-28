@@ -10,10 +10,7 @@ use Simara\Cart\Infrastructure\MemoryCartRepository;
 
 final class CartUseCaseTest extends TestCase
 {
-	/**
-	 * @var CartUseCase
-	 */
-	private $useCase;
+	private CartUseCase $useCase;
 
 	public function testFullScenarioSuccess(): void
 	{

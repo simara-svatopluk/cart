@@ -7,14 +7,10 @@ use Doctrine\Common\Collections\Collection;
 
 class Cart
 {
+    private string $id;
 
     /**
-     * @var string
-     */
-    private $id;
-
-    /**
-     * @var Collection|Item[]
+     * @var Collection&Item[]
      */
     private $items;
 
@@ -54,13 +50,9 @@ class Cart
 
     public function calculate(Prices $prices): CartDetail
     {
-        $detailItems = $this->items->map(function (Item $item) use ($prices): ItemDetail {
-            return $item->toDetail($prices);
-        })->getValues();
+        $detailItems = $this->items->map(fn(Item $item): ItemDetail => $item->toDetail($prices))->getValues();
 
-        $itemPrices = $this->items->map(function (Item $item) use ($prices): Price {
-            return $item->calculatePrice($prices);
-        })->getValues();
+        $itemPrices = $this->items->map(fn(Item $item): Price => $item->calculatePrice($prices))->getValues();
 
         $totalPrice = Price::sum($itemPrices);
 

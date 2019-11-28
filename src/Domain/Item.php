@@ -4,18 +4,12 @@ namespace Simara\Cart\Domain;
 
 class Item
 {
-
     private $generatedId;
 
-    /**
-     * @var string
-     */
-    private $productId;
+    private string $productId;
 
-    /**
-     * @var int
-     */
-    private $amount;
+    private int $amount;
+
     /**
      * @throws AmountMustBePositiveException
      */
