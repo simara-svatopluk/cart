@@ -1,0 +1,10 @@
+language: php
+
+php:
+    - 7.4
+
+install:
+    - composer install
+script:
+    - composer phpcs
+    - composer phpstan
