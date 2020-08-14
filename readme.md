@@ -1,8 +1,9 @@
 # Cart
 
-[![Build Status](https://scrutinizer-ci.com/g/simara-svatopluk/cart/badges/build.png?b=master)](https://scrutinizer-ci.com/g/simara-svatopluk/cart/build-status/master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/simara-svatopluk/cart/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/simara-svatopluk/cart/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/simara-svatopluk/cart/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/simara-svatopluk/cart/?branch=master)
+[![Travis CS & Static Analysis](https://travis-ci.com/simara-svatopluk/cart.svg?branch=master)](https://travis-ci.com/github/simara-svatopluk/cart)
+[![Build Status](https://scrutinizer-ci.com/g/simara-svatopluk/cart/badges/build.png?b=master)](https://scrutinizer-ci.com/g/simara-svatopluk/cart/build-status/master)
 
 Sample project that demonstrates how simple e-shop cart can look like. Created to show how do I understand domain-driven design.
 * Domain objects
