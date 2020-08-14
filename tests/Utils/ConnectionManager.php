@@ -9,7 +9,7 @@ use Doctrine\DBAL\Driver\PDOMySql\Driver as MySqlDriver;
 use Doctrine\DBAL\Driver\PDOSqlite\Driver as SqliteDriver;
 use Exception;
 
-class ConnectionManager
+final class ConnectionManager
 {
     private static ?Connection $connectionForCreatingDatabases = null;
 

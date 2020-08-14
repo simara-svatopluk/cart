@@ -4,7 +4,7 @@ namespace Simara\Cart\Domain\Cart;
 
 use Simara\Cart\Domain\Price;
 
-class CartDetail
+final class CartDetail
 {
     /**
      * @var ItemDetail[]

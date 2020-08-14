@@ -6,7 +6,7 @@ use PHPUnit\Framework\TestCase;
 use Simara\Cart\Domain\Price;
 use Simara\Cart\Domain\Prices\PriceNotFoundException;
 
-class CsvPricesTest extends TestCase
+final class CsvPricesTest extends TestCase
 {
     /**
      * @dataProvider successTestCases

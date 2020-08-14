@@ -4,7 +4,7 @@ namespace Simara\Cart\Domain\Cart;
 
 use DomainException;
 
-class CartNotFoundException extends DomainException
+final class CartNotFoundException extends DomainException
 {
 
 }

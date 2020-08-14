@@ -12,7 +12,7 @@ use Simara\Cart\Infrastructure\DoctrineMapping\PriceType;
 use Simara\Cart\Utils\EntityManagerFactory;
 use Simara\Cart\Utils\ConnectionManager;
 
-class DoctrineCartRepositoryTest extends CartRepositoryTest
+final class DoctrineCartRepositoryTest extends CartRepositoryTest
 {
     private EntityManager $entityManager;
 

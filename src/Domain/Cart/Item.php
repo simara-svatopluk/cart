@@ -5,7 +5,7 @@ namespace Simara\Cart\Domain\Cart;
 use Simara\Cart\Domain\Price;
 use Simara\Cart\Domain\Prices\Prices;
 
-class Item
+final class Item
 {
     private int $generatedId;
 

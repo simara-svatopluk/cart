@@ -5,7 +5,7 @@ namespace Simara\Cart\Domain;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 
-class PriceTest extends TestCase
+final class PriceTest extends TestCase
 {
 
     public function testAdd(): void

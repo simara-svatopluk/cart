@@ -9,7 +9,7 @@ use Simara\Cart\Domain\Cart\CartNotFoundException;
 use Simara\Cart\Domain\Cart\CartRepository;
 use TypeError;
 
-class DoctrineCartRepository implements CartRepository
+final class DoctrineCartRepository implements CartRepository
 {
     private EntityManager $entityManger;
 

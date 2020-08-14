@@ -4,7 +4,7 @@ namespace Simara\Cart\Domain;
 
 use Litipk\BigNumbers\Decimal;
 
-class Price
+final class Price
 {
     private const DECIMALS = 2;
 

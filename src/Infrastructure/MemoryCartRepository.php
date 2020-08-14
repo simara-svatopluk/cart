@@ -6,7 +6,7 @@ use Simara\Cart\Domain\Cart\Cart;
 use Simara\Cart\Domain\Cart\CartNotFoundException;
 use Simara\Cart\Domain\Cart\CartRepository;
 
-class MemoryCartRepository implements CartRepository
+final class MemoryCartRepository implements CartRepository
 {
     /**
      * @var array<string, Cart>

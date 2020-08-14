@@ -7,7 +7,7 @@ use Doctrine\Common\Collections\Collection;
 use Simara\Cart\Domain\Price;
 use Simara\Cart\Domain\Prices\Prices;
 
-class Cart
+final class Cart
 {
     private string $id;
 

@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Simara\Cart\Domain\Price;
 use Simara\Cart\Domain\Prices\Prices;
 
-class CartTest extends TestCase
+final class CartTest extends TestCase
 {
 
     public function testCalculateEmptyCart(): void

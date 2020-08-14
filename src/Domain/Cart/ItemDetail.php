@@ -4,7 +4,7 @@ namespace Simara\Cart\Domain\Cart;
 
 use Simara\Cart\Domain\Price;
 
-class ItemDetail
+final class ItemDetail
 {
     private string $productId;
 

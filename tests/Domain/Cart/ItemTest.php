@@ -11,7 +11,7 @@ use Simara\Cart\Domain\Cart\ItemDetail;
 use Simara\Cart\Domain\Price;
 use Simara\Cart\Domain\Prices\Prices;
 
-class ItemTest extends TestCase
+final class ItemTest extends TestCase
 {
 
     public function testToDetail(): void

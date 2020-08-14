@@ -4,7 +4,7 @@ namespace Simara\Cart\Domain\Cart;
 
 use DomainException;
 
-class AmountMustBePositiveException extends DomainException
+final class AmountMustBePositiveException extends DomainException
 {
 
 }
