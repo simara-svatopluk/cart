@@ -43,9 +43,9 @@ class CartTest extends TestCase
         $expected = new CartDetail($expectedItems, new Price("50.0"));
 
         $prices = [
-        	'a' => new Price("10.0"),
-			'b' => new Price("20.0"),
-		];
+            'a' => new Price("10.0"),
+            'b' => new Price("20.0"),
+        ];
         Assert::assertEquals($expected, $cart->calculate($this->createStaticPrices($prices)));
     }
 
@@ -122,12 +122,13 @@ class CartTest extends TestCase
         Assert::assertSame('1', $cart->getId());
     }
 
-	private function createConstantPrices(string $price): Prices
-	{
-		return new ConstantPrices(new Price($price));
-	}
+    private function createConstantPrices(string $price): Prices
+    {
+        return new ConstantPrices(new Price($price));
+    }
 
-	private function createStaticPrices(array $prices): Prices {
-    	return new StaticPrices($prices);
-	}
+    private function createStaticPrices(array $prices): Prices
+    {
+        return new StaticPrices($prices);
+    }
 }

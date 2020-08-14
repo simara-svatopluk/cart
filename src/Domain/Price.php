@@ -24,10 +24,10 @@ class Price
     public static function sum(array $prices): self
     {
         return array_reduce(
-        	$prices,
-			fn(self $carry, self $price) => $carry->add($price),
-			new self('0')
-		);
+            $prices,
+            fn(self $carry, self $price) => $carry->add($price),
+            new self('0')
+        );
     }
 
     public function getWithVat(): string

@@ -30,7 +30,7 @@ class ItemDetail
     }
 
     public function getPrice(): Price
-	{
+    {
         return $this->price;
     }
 }

@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Simara\Cart\Application;
@@ -11,35 +12,34 @@ use Simara\Cart\Domain\Prices\Prices;
 
 final class CartUseCase
 {
-	private CartRepository $repository;
+    private CartRepository $repository;
 
-	private Prices $prices;
+    private Prices $prices;
 
-	public function __construct(CartRepository $repository, Prices $prices)
-	{
-		$this->repository = $repository;
-		$this->prices = $prices;
-	}
+    public function __construct(CartRepository $repository, Prices $prices)
+    {
+        $this->repository = $repository;
+        $this->prices = $prices;
+    }
 
-	public function add(string $cartId, string $productId, int $amount): void
-	{
-		$cart = $this->get($cartId);
-		$cart->add($productId, $amount);
-		$this->repository->add($cart);
-	}
+    public function add(string $cartId, string $productId, int $amount): void
+    {
+        $cart = $this->get($cartId);
+        $cart->add($productId, $amount);
+        $this->repository->add($cart);
+    }
 
-	public function detail(string $cartId): CartDetail
-	{
-		return $this->get($cartId)->calculate($this->prices);
-	}
+    public function detail(string $cartId): CartDetail
+    {
+        return $this->get($cartId)->calculate($this->prices);
+    }
 
-	private function get(string $cartId): Cart
-	{
-		try {
-			return $this->repository->get($cartId);
-		} catch (CartNotFoundException $e) {
-			return new Cart($cartId);
-		}
-	}
-
+    private function get(string $cartId): Cart
+    {
+        try {
+            return $this->repository->get($cartId);
+        } catch (CartNotFoundException $e) {
+            return new Cart($cartId);
+        }
+    }
 }

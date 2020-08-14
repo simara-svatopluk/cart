@@ -46,7 +46,7 @@ class ItemTest extends TestCase
     public function testInitialAmountCannotBeNegative()
     {
         $this->expectException(AmountMustBePositiveException::class);
-        new Item('x',  -1);
+        new Item('x', -1);
     }
 
     public function testInitialAmountCannotBeZero()
@@ -58,7 +58,7 @@ class ItemTest extends TestCase
     public function testAddNegativeThrowsException()
     {
         $this->expectException(AmountMustBePositiveException::class);
-        $item = new Item('x',  1);
+        $item = new Item('x', 1);
         $item->add(-1);
     }
 
@@ -92,8 +92,8 @@ class ItemTest extends TestCase
         Assert::assertEquals($expected, $price);
     }
 
-	private function createConstantPrices(string $price): Prices
-	{
-		return new ConstantPrices(new Price($price));
-	}
+    private function createConstantPrices(string $price): Prices
+    {
+        return new ConstantPrices(new Price($price));
+    }
 }

@@ -8,26 +8,27 @@ use Simara\Cart\Domain\Prices\PriceNotFoundException;
 
 class CsvPricesTest extends TestCase
 {
-	/**
-	 * @dataProvider successTestCases
-	 */
-	public function testSuccess(string $productId, Price $expected): void
-	{
-		$prices = new CsvPrices(__DIR__ . '/fixtures/prices.csv');
-		$actual = $prices->unitPrice($productId);
-		$this->assertEquals($expected, $actual);
-	}
+    /**
+     * @dataProvider successTestCases
+     */
+    public function testSuccess(string $productId, Price $expected): void
+    {
+        $prices = new CsvPrices(__DIR__ . '/fixtures/prices.csv');
+        $actual = $prices->unitPrice($productId);
+        $this->assertEquals($expected, $actual);
+    }
 
-	public function successTestCases(): \Traversable
-	{
-		yield ['p12345', new Price('50.0')];
-		yield ['p54321', new Price('100.10')];
-	}
+    public function successTestCases(): \Traversable
+    {
+        yield ['p12345', new Price('50.0')];
+        yield ['p54321', new Price('100.10')];
+    }
 
-	public function testProductHasNoPriceThrowsException(): void {
-		$this->expectException(PriceNotFoundException::class);
+    public function testProductHasNoPriceThrowsException(): void
+    {
+        $this->expectException(PriceNotFoundException::class);
 
-		$prices = new CsvPrices(__DIR__ . '/fixtures/prices.csv');
-		$prices->unitPrice('not-product-id');
-	}
+        $prices = new CsvPrices(__DIR__ . '/fixtures/prices.csv');
+        $prices->unitPrice('not-product-id');
+    }
 }

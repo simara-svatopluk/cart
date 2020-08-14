@@ -13,7 +13,7 @@ class Cart
 
     /**
      * @var Collection&Item[]
-	 */
+     */
     private $items;
 
     public function __construct(string $id)
@@ -34,7 +34,7 @@ class Cart
 
     /**
      * @throws ProductNotInCartException
-	 */
+     */
     public function remove(string $productId): void
     {
         $key = $this->findKey($productId);
@@ -43,7 +43,7 @@ class Cart
 
     /**
      * @throws ProductNotInCartException
-	 */
+     */
     public function changeAmount(string $productId, int $amount): void
     {
         $item = $this->find($productId);
@@ -51,7 +51,7 @@ class Cart
     }
 
     public function calculate(Prices $prices): CartDetail
-	{
+    {
         $detailItems = $this->items->map(fn(Item $item): ItemDetail => $item->toDetail($prices))->getValues();
 
         $itemPrices = $this->items->map(fn(Item $item): Price => $item->calculatePrice($prices))->getValues();
@@ -63,9 +63,9 @@ class Cart
 
     /**
      * @throws ProductNotInCartException
-	 */
+     */
     private function find(string $productId): Item
-	{
+    {
         foreach ($this->items as $item) {
             if ($item->getProductId() === $productId) {
                 return $item;
@@ -76,7 +76,7 @@ class Cart
 
     /**
      * @throws ProductNotInCartException
-	 */
+     */
     private function findKey(string $productId): string
     {
         foreach ($this->items as $key => $item) {

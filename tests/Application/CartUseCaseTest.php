@@ -1,4 +1,5 @@
 <?php
+
 declare(strict_types=1);
 
 namespace Simara\Cart\Application;
@@ -10,27 +11,27 @@ use Simara\Cart\Infrastructure\MemoryCartRepository;
 
 final class CartUseCaseTest extends TestCase
 {
-	private CartUseCase $useCase;
+    private CartUseCase $useCase;
 
-	public function testFullScenarioSuccess(): void
-	{
-		$this->useCase->add('1', 'p1', 1);
+    public function testFullScenarioSuccess(): void
+    {
+        $this->useCase->add('1', 'p1', 1);
 
-		$detail = $this->useCase->detail('1');
+        $detail = $this->useCase->detail('1');
 
-		$this->assertGreaterThan(0, (float) $detail->getTotalPrice()->getWithVat());
-		$this->assertCount(1, $detail->getItems());
-	}
+        $this->assertGreaterThan(0, (float) $detail->getTotalPrice()->getWithVat());
+        $this->assertCount(1, $detail->getItems());
+    }
 
-	protected function setUp()
-	{
-		parent::setUp();
+    protected function setUp()
+    {
+        parent::setUp();
 
-		$this->useCase = new CartUseCase(
-			new MemoryCartRepository(),
-			$this->prices = new StaticPrices([
-				'p1' => new Price('10.0'),
-			])
-		);
-	}
+        $this->useCase = new CartUseCase(
+            new MemoryCartRepository(),
+            $this->prices = new StaticPrices([
+                'p1' => new Price('10.0'),
+            ])
+        );
+    }
 }

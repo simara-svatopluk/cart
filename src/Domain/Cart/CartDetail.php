@@ -8,7 +8,7 @@ class CartDetail
 {
     /**
      * @var ItemDetail[]
-	 */
+     */
     private array $items;
 
     private Price $totalPrice;
@@ -24,14 +24,14 @@ class CartDetail
 
     /**
      * @return ItemDetail[]
-	 */
+     */
     public function getItems(): array
     {
         return $this->items;
     }
 
     public function getTotalPrice(): Price
-	{
+    {
         return $this->totalPrice;
     }
 }

@@ -24,7 +24,10 @@ abstract class CartRepositoryTest extends TestCase
         $this->flush();
 
         $foundCart = $this->repository->get('1');
-        Assert::assertEquals($this->getCartDetailWithItem(), $foundCart->calculate($this->createConstantPrices("10.0")));
+        Assert::assertEquals(
+            $this->getCartDetailWithItem(),
+            $foundCart->calculate($this->createConstantPrices("10.0"))
+        );
     }
 
     private function createCartWithItem(string $id): Cart
@@ -129,10 +132,16 @@ abstract class CartRepositoryTest extends TestCase
         $this->flush();
 
         $foundEmpty = $this->repository->get('1');
-        Assert::assertEquals($this->getCartDetailWithItem(), $foundEmpty->calculate($this->createConstantPrices("10.0")));
+        Assert::assertEquals(
+            $this->getCartDetailWithItem(),
+            $foundEmpty->calculate($this->createConstantPrices("10.0"))
+        );
 
         $foundEmpty = $this->repository->get('2');
-        Assert::assertEquals($this->getEmptyCartDetail(), $foundEmpty->calculate($this->createConstantPrices("10.0")));
+        Assert::assertEquals(
+            $this->getEmptyCartDetail(),
+            $foundEmpty->calculate($this->createConstantPrices("10.0"))
+        );
     }
 
     protected function setUp()
@@ -142,8 +151,8 @@ abstract class CartRepositoryTest extends TestCase
 
     abstract protected function createRepository(): CartRepository;
 
-	private function createConstantPrices(string $string): Prices
-	{
-		return new ConstantPrices(new Price($string));
-	}
+    private function createConstantPrices(string $string): Prices
+    {
+        return new ConstantPrices(new Price($string));
+    }
 }
