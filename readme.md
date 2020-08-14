@@ -1,6 +1,13 @@
 # Cart
 
 [![Build Status](https://scrutinizer-ci.com/g/simara-svatopluk/cart/badges/build.png?b=master)](https://scrutinizer-ci.com/g/simara-svatopluk/cart/build-status/master)
+(Tests)
+
+
+[![Travis CS & Static Analysis](https://travis-ci.com/simara-svatopluk/cart.svg?branch=master)](https://travis-ci.com/github/simara-svatopluk/cart)
+(PSR 12, PHPStan max level, Psalm max level)
+
+
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/simara-svatopluk/cart/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/simara-svatopluk/cart/?branch=master)
 [![Code Coverage](https://scrutinizer-ci.com/g/simara-svatopluk/cart/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/simara-svatopluk/cart/?branch=master)
 
