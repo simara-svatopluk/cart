@@ -1,5 +1,5 @@
 <doctrine-mapping>
-    <entity name="Simara\Cart\Domain\Cart">
+    <entity name="Simara\Cart\Domain\Cart\Cart">
         <id name="id" type="string" />
 
         <many-to-many field="items" target-entity="Item">

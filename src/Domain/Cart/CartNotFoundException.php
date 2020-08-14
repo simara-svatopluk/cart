@@ -1,6 +1,6 @@
 <?php
 
-namespace Simara\Cart\Domain;
+namespace Simara\Cart\Domain\Cart;
 
 use DomainException;
 

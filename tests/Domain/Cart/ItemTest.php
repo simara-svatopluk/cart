@@ -1,9 +1,15 @@
 <?php
 
-namespace Simara\Cart\Domain;
+namespace Simara\Cart\Domain\Cart;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
+use Simara\Cart\Domain\Cart\AmountMustBePositiveException;
+use Simara\Cart\Domain\Cart\ConstantPrices;
+use Simara\Cart\Domain\Cart\Item;
+use Simara\Cart\Domain\Cart\ItemDetail;
+use Simara\Cart\Domain\Price;
+use Simara\Cart\Domain\Prices\Prices;
 
 class ItemTest extends TestCase
 {

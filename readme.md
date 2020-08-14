@@ -18,7 +18,7 @@ You can also see how do I program, commit, what technology I can handle...
 Prices are not stored in the Cart itself but are loaded on demand.
 This is a common use-case because we usually need fresh prices from a database or ERP.
 
-Cart is separated from "loading prices" by an interface [`Prices`](src/Domain/Prices.php).
+Cart is separated from "loading prices" by an interface [`Prices`](src/Domain/Prices/Prices.php).
 This is a domain element but have to be implemented by the project needs - by API calls or database queries.
 
 ## Fixed Prices
@@ -34,7 +34,7 @@ if we use CSV for storing pricing, we implement [`CsvPrices`](src/Infrastructure
 Then we register these classes in or favorite DI container.
 If you don't know how, you can find inspiration in [`DependenciesTest`](tests/Application/DependenciesTest.php).
 
-We can use domain objects directly in UI/CLI/target layer, and then we have to pass objects like [`Repositories`](src/Domain/CartRepository.php) to that layer.
+We can use domain objects directly in UI/CLI/target layer, and then we have to pass objects like [`Repositories`](src/Domain/Cart/CartRepository.php) to that layer.
 Or we can wrap domain objects into classes that represent full use-cases.
 You may call them handlers/facades/[`useCases`](src/Application/CartUseCase.php)/... depending on the project infrastructure.
 

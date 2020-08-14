@@ -5,7 +5,7 @@ namespace Simara\Cart\Application;
 
 use PHPUnit\Framework\TestCase;
 use Simara\Cart\Domain\Price;
-use Simara\Cart\Domain\StaticPrices;
+use Simara\Cart\Domain\Cart\StaticPrices;
 use Simara\Cart\Infrastructure\MemoryCartRepository;
 
 final class CartUseCaseTest extends TestCase

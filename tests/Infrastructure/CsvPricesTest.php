@@ -4,7 +4,7 @@ namespace Simara\Cart\Infrastructure;
 
 use PHPUnit\Framework\TestCase;
 use Simara\Cart\Domain\Price;
-use Simara\Cart\Domain\PriceNotFoundException;
+use Simara\Cart\Domain\Prices\PriceNotFoundException;
 
 class CsvPricesTest extends TestCase
 {

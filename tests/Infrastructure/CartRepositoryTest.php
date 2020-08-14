@@ -4,14 +4,14 @@ namespace Simara\Cart\Infrastructure;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
-use Simara\Cart\Domain\Cart;
-use Simara\Cart\Domain\CartDetail;
-use Simara\Cart\Domain\CartNotFoundException;
-use Simara\Cart\Domain\CartRepository;
-use Simara\Cart\Domain\ConstantPrices;
-use Simara\Cart\Domain\ItemDetail;
+use Simara\Cart\Domain\Cart\Cart;
+use Simara\Cart\Domain\Cart\CartDetail;
+use Simara\Cart\Domain\Cart\CartNotFoundException;
+use Simara\Cart\Domain\Cart\CartRepository;
+use Simara\Cart\Domain\Cart\ConstantPrices;
+use Simara\Cart\Domain\Cart\ItemDetail;
 use Simara\Cart\Domain\Price;
-use Simara\Cart\Domain\Prices;
+use Simara\Cart\Domain\Prices\Prices;
 
 abstract class CartRepositoryTest extends TestCase
 {

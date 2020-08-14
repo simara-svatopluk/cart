@@ -1,7 +1,10 @@
 <?php
 declare(strict_types=1);
 
-namespace Simara\Cart\Domain;
+namespace Simara\Cart\Domain\Cart;
+
+use Simara\Cart\Domain\Price;
+use Simara\Cart\Domain\Prices\Prices;
 
 final class ConstantPrices implements Prices
 {

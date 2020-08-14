@@ -1,6 +1,8 @@
 <?php
 
-namespace Simara\Cart\Domain;
+namespace Simara\Cart\Domain\Cart;
+
+use Simara\Cart\Domain\Price;
 
 class ItemDetail
 {
@@ -28,7 +30,7 @@ class ItemDetail
     }
 
     public function getPrice(): Price
-    {
+	{
         return $this->price;
     }
 }

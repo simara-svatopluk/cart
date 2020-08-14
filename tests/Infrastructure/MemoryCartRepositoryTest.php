@@ -2,7 +2,7 @@
 
 namespace Simara\Cart\Infrastructure;
 
-use Simara\Cart\Domain\CartRepository;
+use Simara\Cart\Domain\Cart\CartRepository;
 
 class MemoryCartRepositoryTest extends CartRepositoryTest
 {

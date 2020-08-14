@@ -1,7 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Simara\Cart\Domain;
+namespace Simara\Cart\Domain\Prices;
+
+use Simara\Cart\Domain\Price;
 
 interface Prices
 {

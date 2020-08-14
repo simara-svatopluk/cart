@@ -4,9 +4,9 @@ namespace Simara\Cart\Infrastructure;
 
 use Doctrine\ORM\EntityManager;
 use PHPUnit\Framework\Assert;
-use Simara\Cart\Domain\Cart;
-use Simara\Cart\Domain\CartRepository;
-use Simara\Cart\Domain\Item;
+use Simara\Cart\Domain\Cart\Cart;
+use Simara\Cart\Domain\Cart\CartRepository;
+use Simara\Cart\Domain\Cart\Item;
 use Simara\Cart\Domain\Price;
 use Simara\Cart\Infrastructure\DoctrineMapping\PriceType;
 use Simara\Cart\Utils\EntityManagerFactory;

@@ -21,7 +21,7 @@ final class EntityManagerFactory
         $config = new Configuration();
 
         $namespaces = [
-            __DIR__ . '/../../src/Infrastructure/DoctrineMapping' => 'Simara\\Cart\\Domain'
+            __DIR__ . '/../../src/Infrastructure/DoctrineMapping' => 'Simara\\Cart\\Domain\\Cart'
         ];
         $xmlDrive = new SimplifiedXmlDriver($namespaces, '.xml');
 

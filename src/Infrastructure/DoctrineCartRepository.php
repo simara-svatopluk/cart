@@ -4,9 +4,9 @@ namespace Simara\Cart\Infrastructure;
 
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\NoResultException;
-use Simara\Cart\Domain\Cart;
-use Simara\Cart\Domain\CartNotFoundException;
-use Simara\Cart\Domain\CartRepository;
+use Simara\Cart\Domain\Cart\Cart;
+use Simara\Cart\Domain\Cart\CartNotFoundException;
+use Simara\Cart\Domain\Cart\CartRepository;
 use TypeError;
 
 class DoctrineCartRepository implements CartRepository

@@ -2,9 +2,9 @@
 
 namespace Simara\Cart\Infrastructure;
 
-use Simara\Cart\Domain\Cart;
-use Simara\Cart\Domain\CartNotFoundException;
-use Simara\Cart\Domain\CartRepository;
+use Simara\Cart\Domain\Cart\Cart;
+use Simara\Cart\Domain\Cart\CartNotFoundException;
+use Simara\Cart\Domain\Cart\CartRepository;
 
 class MemoryCartRepository implements CartRepository
 {

@@ -4,8 +4,8 @@ declare(strict_types=1);
 namespace Simara\Cart\Infrastructure;
 
 use Simara\Cart\Domain\Price;
-use Simara\Cart\Domain\PriceNotFoundException;
-use Simara\Cart\Domain\Prices;
+use Simara\Cart\Domain\Prices\PriceNotFoundException;
+use Simara\Cart\Domain\Prices\Prices;
 
 final class CsvPrices implements Prices
 {
