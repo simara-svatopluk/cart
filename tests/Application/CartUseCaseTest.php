@@ -23,7 +23,7 @@ final class CartUseCaseTest extends TestCase
         $this->assertCount(1, $detail->getItems());
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 

@@ -14,7 +14,7 @@ use Simara\Cart\Domain\Prices\Prices;
 class ItemTest extends TestCase
 {
 
-    public function testToDetail()
+    public function testToDetail(): void
     {
         $item = new Item('x', 2);
 
@@ -23,7 +23,7 @@ class ItemTest extends TestCase
         Assert::assertEquals($expected, $item->toDetail($this->createConstantPrices("5.0")));
     }
 
-    public function testAdd()
+    public function testAdd(): void
     {
         $item = new Item('x', 2);
         $item->add(5);
@@ -33,7 +33,7 @@ class ItemTest extends TestCase
         Assert::assertEquals($expected, $item->toDetail($this->createConstantPrices("5.0")));
     }
 
-    public function testChangeAmount()
+    public function testChangeAmount(): void
     {
         $item = new Item('x', 2);
         $item->changeAmount(1);
@@ -43,47 +43,47 @@ class ItemTest extends TestCase
         Assert::assertEquals($expected, $item->toDetail($this->createConstantPrices("5.0")));
     }
 
-    public function testInitialAmountCannotBeNegative()
+    public function testInitialAmountCannotBeNegative(): void
     {
         $this->expectException(AmountMustBePositiveException::class);
         new Item('x', -1);
     }
 
-    public function testInitialAmountCannotBeZero()
+    public function testInitialAmountCannotBeZero(): void
     {
         $this->expectException(AmountMustBePositiveException::class);
         new Item('x', 0);
     }
 
-    public function testAddNegativeThrowsException()
+    public function testAddNegativeThrowsException(): void
     {
         $this->expectException(AmountMustBePositiveException::class);
         $item = new Item('x', 1);
         $item->add(-1);
     }
 
-    public function testAddZeroThrowsException()
+    public function testAddZeroThrowsException(): void
     {
         $this->expectException(AmountMustBePositiveException::class);
         $item = new Item('x', 1);
         $item->add(0);
     }
 
-    public function testChangeToNegativeThrowsException()
+    public function testChangeToNegativeThrowsException(): void
     {
         $this->expectException(AmountMustBePositiveException::class);
         $item = new Item('x', 1);
         $item->changeAmount(-1);
     }
 
-    public function testChangeToZeroThrowsException()
+    public function testChangeToZeroThrowsException(): void
     {
         $this->expectException(AmountMustBePositiveException::class);
         $item = new Item('x', 1);
         $item->changeAmount(0);
     }
 
-    public function testCalculateTotalPrice()
+    public function testCalculateTotalPrice(): void
     {
         $item = new Item('x', 3);
         $price = $item->calculatePrice($this->createConstantPrices("5.0"));

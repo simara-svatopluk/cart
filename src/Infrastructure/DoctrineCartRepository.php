@@ -36,7 +36,9 @@ class DoctrineCartRepository implements CartRepository
         $query = $queryBuilder->getQuery();
 
         try {
-            return $query->getSingleResult();
+            $cart = $query->getSingleResult();
+            \assert($cart instanceof Cart);
+            return $cart;
         } catch (NoResultException $e) {
             throw new CartNotFoundException();
         }

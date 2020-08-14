@@ -12,7 +12,7 @@ class Cart
     private string $id;
 
     /**
-     * @var Collection|Item[]
+     * @var Collection<int, Item>
      */
     private $items;
 
@@ -77,7 +77,7 @@ class Cart
     /**
      * @throws ProductNotInCartException
      */
-    private function findKey(string $productId): string
+    private function findKey(string $productId): int
     {
         foreach ($this->items as $key => $item) {
             if ($item->getProductId() === $productId) {

@@ -42,7 +42,7 @@ class DoctrineCartRepositoryTest extends CartRepositoryTest
         $this->entityManager->getConnection()->close();
     }
 
-    public function testItemsAreRemovedWithCart()
+    public function testItemsAreRemovedWithCart(): void
     {
         $cart = new Cart('1');
         $cart->add('1', 1);

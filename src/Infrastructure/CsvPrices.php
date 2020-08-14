@@ -31,7 +31,7 @@ final class CsvPrices implements Prices
         return $this->prices[$productId];
     }
 
-    private function loadPrices()
+    private function loadPrices(): void
     {
         if ($this->prices === []) {
             $handle = \fopen($this->filename, 'r');

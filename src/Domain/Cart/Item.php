@@ -7,7 +7,7 @@ use Simara\Cart\Domain\Prices\Prices;
 
 class Item
 {
-    private $generatedId;
+    private int $generatedId;
 
     private string $productId;
 

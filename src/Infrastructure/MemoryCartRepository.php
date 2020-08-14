@@ -8,6 +8,9 @@ use Simara\Cart\Domain\Cart\CartRepository;
 
 class MemoryCartRepository implements CartRepository
 {
+    /**
+     * @var array<string, Cart>
+     */
     private array $carts = [];
 
     public function add(Cart $cart): void

@@ -17,7 +17,7 @@ abstract class CartRepositoryTest extends TestCase
 {
     private CartRepository $repository;
 
-    public function testAddAndGetSuccessfully()
+    public function testAddAndGetSuccessfully(): void
     {
         $cart = $this->createCartWithItem('1');
         $this->repository->add($cart);
@@ -47,7 +47,7 @@ abstract class CartRepositoryTest extends TestCase
         return new CartDetail([$item], new Price("10"));
     }
 
-    public function testAddAndRemoveSuccessfully()
+    public function testAddAndRemoveSuccessfully(): void
     {
         $cart = $this->createCartWithItem('1');
         $this->repository->add($cart);
@@ -60,7 +60,7 @@ abstract class CartRepositoryTest extends TestCase
         $this->repository->get('1');
     }
 
-    public function testAddedIsTheSameObject()
+    public function testAddedIsTheSameObject(): void
     {
         $empty = $this->createEmptyCart('1');
         $this->repository->add($empty);
@@ -71,7 +71,7 @@ abstract class CartRepositoryTest extends TestCase
         Assert::assertEquals($this->getCartDetailWithItem(), $found->calculate($this->createConstantPrices("10.0")));
     }
 
-    public function testFlushAddedItemPersists()
+    public function testFlushAddedItemPersists(): void
     {
         $empty = $this->createEmptyCart('1');
         $this->repository->add($empty);
@@ -85,7 +85,7 @@ abstract class CartRepositoryTest extends TestCase
         Assert::assertEquals($this->getCartDetailWithItem(), $found->calculate($this->createConstantPrices("10.0")));
     }
 
-    public function testFlushRemovedItemPersists()
+    public function testFlushRemovedItemPersists(): void
     {
         $empty = $this->createCartWithItem('1');
         $this->repository->add($empty);
@@ -109,21 +109,21 @@ abstract class CartRepositoryTest extends TestCase
         return new CartDetail([], new Price("0"));
     }
 
-    public function testGetNotExistingCauseException()
+    public function testGetNotExistingCauseException(): void
     {
         $this->expectException(CartNotFoundException::class);
 
         $this->repository->get('1');
     }
 
-    public function testRemoveNotExistingCauseException()
+    public function testRemoveNotExistingCauseException(): void
     {
         $this->expectException(CartNotFoundException::class);
 
         $this->repository->remove('1');
     }
 
-    public function testAddTwoAndGetTwoSuccessfully()
+    public function testAddTwoAndGetTwoSuccessfully(): void
     {
         $withItem = $this->createCartWithItem('1');
         $this->repository->add($withItem);

@@ -8,3 +8,4 @@ install:
 script:
     - composer phpcs
     - composer phpstan
+    - composer psalm

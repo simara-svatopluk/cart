@@ -49,6 +49,6 @@ class Price
 
     private static function fromDecimal(Decimal $withVat): self
     {
-        return new self($withVat->floor(self::DECIMALS));
+        return new self($withVat->floor(self::DECIMALS)->__toString());
     }
 }
