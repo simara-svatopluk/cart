@@ -10,7 +10,7 @@ use Simara\Cart\Domain\Prices\Prices;
 final class StaticPrices implements Prices
 {
     /**
-     * @var Price|array<string, Price>
+     * @var array<string, Price>
      */
     private array $prices;
 

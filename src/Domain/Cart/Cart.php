@@ -12,7 +12,7 @@ class Cart
     private string $id;
 
     /**
-     * @var Collection&Item[]
+     * @var Collection|Item[]
      */
     private $items;
 

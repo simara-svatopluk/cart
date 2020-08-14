@@ -35,6 +35,7 @@ final class CsvPrices implements Prices
     {
         if ($this->prices === []) {
             $handle = \fopen($this->filename, 'r');
+            assert(\is_resource($handle));
             while (($data = fgetcsv($handle, 1000, ",")) !== false) {
                 $id = $data[0];
                 $price = new Price($data[1]);

@@ -29,7 +29,7 @@ final class CartUseCaseTest extends TestCase
 
         $this->useCase = new CartUseCase(
             new MemoryCartRepository(),
-            $this->prices = new StaticPrices([
+            new StaticPrices([
                 'p1' => new Price('10.0'),
             ])
         );

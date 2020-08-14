@@ -2,7 +2,6 @@
 
 namespace Simara\Cart\Domain\Cart;
 
-use Simara\Cart\Domain\Cart\ItemDetail;
 use Simara\Cart\Domain\Price;
 use Simara\Cart\Domain\Prices\Prices;
 
