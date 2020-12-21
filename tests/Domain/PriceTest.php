@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class PriceTest extends TestCase
 {
-    public function testAdd()
+    public function testAdd(): void
     {
         $a = new Price(10);
         $b = new Price(1);
@@ -17,7 +17,7 @@ class PriceTest extends TestCase
         Assert::assertEquals($expected, $result);
     }
 
-    public function testMultiply()
+    public function testMultiply(): void
     {
         $a = new Price(10);
         $result = $a->multiply(2);
@@ -26,7 +26,7 @@ class PriceTest extends TestCase
         Assert::assertEquals($expected, $result);
     }
 
-    public function testSum()
+    public function testSum(): void
     {
         $prices = [
             new Price(9),

@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 
 class ItemTest extends TestCase
 {
-    public function testAdd()
+    public function testAdd(): void
     {
         $item = new Item('x', new Price(5), 2);
         $newItem = $item->add(5);
@@ -17,7 +17,7 @@ class ItemTest extends TestCase
         Assert::assertEquals($expected, $newItem);
     }
 
-    public function testChangeAmount()
+    public function testChangeAmount(): void
     {
         $item = new Item('x', new Price(5), 2);
         $newItem = $item->withAmount(1);
@@ -27,40 +27,40 @@ class ItemTest extends TestCase
         Assert::assertEquals($expected, $newItem);
     }
 
-    public function testInitialAmountCannotBeNegative()
+    public function testInitialAmountCannotBeNegative(): void
     {
         $this->expectException(AmountMustBePositive::class);
         new Item('x', new Price(5), -1);
     }
 
-    public function testInitialAmountCannotBeZero()
+    public function testInitialAmountCannotBeZero(): void
     {
         $this->expectException(AmountMustBePositive::class);
         new Item('x', new Price(5), 0);
     }
 
-    public function testAddNegativeThrowsException()
+    public function testAddNegativeThrowsException(): void
     {
         $this->expectException(AmountMustBePositive::class);
         $item = new Item('x', new Price(5), 1);
         $item->add(-1);
     }
 
-    public function testAddZeroThrowsException()
+    public function testAddZeroThrowsException(): void
     {
         $this->expectException(AmountMustBePositive::class);
         $item = new Item('x', new Price(5), 1);
         $item->add(0);
     }
 
-    public function testChangeToNegativeThrowsException()
+    public function testChangeToNegativeThrowsException(): void
     {
         $this->expectException(AmountMustBePositive::class);
         $item = new Item('x', new Price(5), 1);
         $item->withAmount(-1);
     }
 
-    public function testChangeToZeroThrowsException()
+    public function testChangeToZeroThrowsException(): void
     {
         $this->expectException(AmountMustBePositive::class);
         $item = new Item('x', new Price(5), 1);
