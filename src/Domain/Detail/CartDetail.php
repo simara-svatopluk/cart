@@ -9,26 +9,25 @@ use Simara\Cart\Domain\Price;
 #[Immutable]
 class CartDetail
 {
-	/**
-	 * @param $items array<int, Item>
-	 */
-	public function __construct(
-		private array $items,
-		private Price $totalPrice,
-	)
-	{
-	}
+    /**
+     * @param $items array<int, Item>
+     */
+    public function __construct(
+        private array $items,
+        private Price $totalPrice,
+    ) {
+    }
 
-	/**
-	 * @return array<int, Item>
-	 */
-	public function getItems(): array
-	{
-		return $this->items;
-	}
+    /**
+     * @return array<int, Item>
+     */
+    public function getItems(): array
+    {
+        return $this->items;
+    }
 
-	public function getTotalPrice(): Price
-	{
-		return $this->totalPrice;
-	}
+    public function getTotalPrice(): Price
+    {
+        return $this->totalPrice;
+    }
 }

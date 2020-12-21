@@ -26,7 +26,7 @@ class Cart
      */
     public function remove(string $productId): void
     {
-    	$this->find($productId);
+        $this->find($productId);
         unset($this->items[$productId]);
     }
 
@@ -41,13 +41,19 @@ class Cart
 
     public function calculate(): CartDetail
     {
-        $items = array_map(function (ItemEntity $item): Item {
-            return $item->toItem();
-        }, $this->items);
+        $items = array_map(
+            function (ItemEntity $item): Item {
+                return $item->toItem();
+            },
+            $this->items
+        );
 
-        $prices = array_map(function (ItemEntity $item): Price {
-            return $item->toItem()->price();
-        }, $this->items);
+        $prices = array_map(
+            function (ItemEntity $item): Price {
+                return $item->toItem()->price();
+            },
+            $this->items
+        );
 
         $totalPrice = Price::sum($prices);
 
@@ -60,8 +66,8 @@ class Cart
     private function find(string $productId): ItemEntity
     {
         if (!isset($this->items[$productId])) {
-			throw new ProductNotInCart();
-		}
+            throw new ProductNotInCart();
+        }
         return $this->items[$productId];
     }
 }

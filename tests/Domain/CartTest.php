@@ -11,7 +11,7 @@ class CartTest extends TestCase
 
     public function testCalculateEmptyCart()
     {
-        $cart = new Cart;
+        $cart = new Cart();
 
         $expected = new CartDetail([], new Price(0));
 
