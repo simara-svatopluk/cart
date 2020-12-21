@@ -2,10 +2,6 @@
 
 namespace Simara\Cart\Domain;
 
-use JetBrains\PhpStorm\Immutable;
-use JetBrains\PhpStorm\Pure;
-
-#[Immutable]
 class Item
 {
     /**
@@ -44,7 +40,6 @@ class Item
         return $this->unitPrice;
     }
 
-    #[Pure]
     public function price(): Price
     {
         return $this->unitPrice->multiply($this->amount);

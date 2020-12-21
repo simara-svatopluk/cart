@@ -2,11 +2,9 @@
 
 namespace Simara\Cart\Domain\Detail;
 
-use JetBrains\PhpStorm\Immutable;
 use Simara\Cart\Domain\Item;
 use Simara\Cart\Domain\Price;
 
-#[Immutable]
 class CartDetail
 {
     /**

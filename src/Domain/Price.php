@@ -2,10 +2,6 @@
 
 namespace Simara\Cart\Domain;
 
-use JetBrains\PhpStorm\Immutable;
-use JetBrains\PhpStorm\Pure;
-
-#[Immutable]
 class Price
 {
     public function __construct(private int $withVat)
@@ -32,14 +28,12 @@ class Price
         return $this->withVat;
     }
 
-    #[Pure]
     public function add(self $adder): self
     {
         $withVat = $this->withVat + $adder->withVat;
         return new self($withVat);
     }
 
-    #[Pure]
     public function multiply(int $multiplier): self
     {
         $withVat = $this->withVat * $multiplier;

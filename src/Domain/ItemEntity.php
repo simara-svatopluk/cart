@@ -2,8 +2,6 @@
 
 namespace Simara\Cart\Domain;
 
-use JetBrains\PhpStorm\Pure;
-
 class ItemEntity
 {
     private Item $item;
@@ -16,13 +14,11 @@ class ItemEntity
         $this->item = $item;
     }
 
-    #[Pure]
     public function toItem(): Item
     {
         return $this->item;
     }
 
-    #[Pure]
     public function getProductId(): string
     {
         return $this->item->getProductId();
