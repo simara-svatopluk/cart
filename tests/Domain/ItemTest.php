@@ -7,82 +7,63 @@ use PHPUnit\Framework\TestCase;
 
 class ItemTest extends TestCase
 {
-
-    public function testToDetail()
-    {
-        $item = new Item('x', new Price(5.0), 2);
-
-        $expected = new ItemDetail('x', new Price(5.0), 2);
-
-        Assert::assertEquals($expected, $item->toDetail());
-    }
-
     public function testAdd()
     {
-        $item = new Item('x', new Price(5.0), 2);
-        $item->add(5);
+        $item = new Item('x', new Price(5), 2);
+        $newItem = $item->add(5);
 
-        $expected = new ItemDetail('x', new Price(5.0), 7);
+        $expected = new Item('x', new Price(5), 7);
 
-        Assert::assertEquals($expected, $item->toDetail());
+        Assert::assertEquals($expected, $newItem);
     }
 
     public function testChangeAmount()
     {
-        $item = new Item('x', new Price(5.0), 2);
-        $item->changeAmount(1);
+        $item = new Item('x', new Price(5), 2);
+        $newItem = $item->withAmount(1);
 
-        $expected = new ItemDetail('x', new Price(5.0), 1);
+        $expected = new Item('x', new Price(5), 1);
 
-        Assert::assertEquals($expected, $item->toDetail());
+        Assert::assertEquals($expected, $newItem);
     }
 
     public function testInitialAmountCannotBeNegative()
     {
-        $this->expectException(AmountMustBePositiveException::class);
-        new Item('x', new Price(5.0), -1);
+        $this->expectException(AmountMustBePositive::class);
+        new Item('x', new Price(5), -1);
     }
 
     public function testInitialAmountCannotBeZero()
     {
-        $this->expectException(AmountMustBePositiveException::class);
-        new Item('x', new Price(5.0), 0);
+        $this->expectException(AmountMustBePositive::class);
+        new Item('x', new Price(5), 0);
     }
 
     public function testAddNegativeThrowsException()
     {
-        $this->expectException(AmountMustBePositiveException::class);
-        $item = new Item('x', new Price(5.0), 1);
+        $this->expectException(AmountMustBePositive::class);
+        $item = new Item('x', new Price(5), 1);
         $item->add(-1);
     }
 
     public function testAddZeroThrowsException()
     {
-        $this->expectException(AmountMustBePositiveException::class);
-        $item = new Item('x', new Price(5.0), 1);
+        $this->expectException(AmountMustBePositive::class);
+        $item = new Item('x', new Price(5), 1);
         $item->add(0);
     }
 
     public function testChangeToNegativeThrowsException()
     {
-        $this->expectException(AmountMustBePositiveException::class);
-        $item = new Item('x', new Price(5.0), 1);
-        $item->changeAmount(-1);
+        $this->expectException(AmountMustBePositive::class);
+        $item = new Item('x', new Price(5), 1);
+        $item->withAmount(-1);
     }
 
     public function testChangeToZeroThrowsException()
     {
-        $this->expectException(AmountMustBePositiveException::class);
-        $item = new Item('x', new Price(5.0), 1);
-        $item->changeAmount(0);
-    }
-
-    public function testCalculateTotalPrice()
-    {
-        $item = new Item('x', new Price(5.0), 3);
-        $price = $item->calculatePrice();
-
-        $expected = new Price(15.0);
-        Assert::assertEquals($expected, $price);
+        $this->expectException(AmountMustBePositive::class);
+        $item = new Item('x', new Price(5), 1);
+        $item->withAmount(0);
     }
 }

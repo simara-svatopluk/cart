@@ -2,75 +2,63 @@
 
 namespace Simara\Cart\Domain;
 
+use JetBrains\PhpStorm\Immutable;
+use JetBrains\PhpStorm\Pure;
+
+#[Immutable]
 class Item
 {
+	/**
+	 * @throws AmountMustBePositive
+	 */
+	public function __construct(
+		private string $productId,
+		private Price $unitPrice,
+		private int $amount = 1
+	)
+	{
+		$this->checkAmount($amount);
+	}
 
-    /**
-     * @var string
-     */
-    private $productId;
+	/**
+	 * @throws AmountMustBePositive
+	 */
+	private function checkAmount(int $amount): void
+	{
+		if ($amount <= 0) {
+			throw new AmountMustBePositive();
+		}
+	}
 
-    /**
-     * @var int
-     */
-    private $amount;
+	public function getProductId(): string
+	{
+		return $this->productId;
+	}
 
-    /**
-     * @var Price
-     */
-    private $unitPrice;
+	public function getAmount(): int
+	{
+		return $this->amount;
+	}
 
-    /**
-     * @throws AmountMustBePositiveException
-     */
-    public function __construct(string $productId, Price $unitPrice, int $amount)
-    {
-        $this->checkAmount($amount);
-        $this->productId = $productId;
-        $this->amount = $amount;
-        $this->unitPrice = $unitPrice;
-    }
+	public function getUnitPrice(): Price
+	{
+		return $this->unitPrice;
+	}
 
-    public function toDetail(): ItemDetail
-    {
-        return new ItemDetail($this->productId, $this->unitPrice, $this->amount);
-    }
+	#[Pure]
+	public function price(): Price
+	{
+		return $this->unitPrice->multiply($this->amount);
+	}
 
-    public function getProductId(): string
-    {
-        return $this->productId;
-    }
+	public function withAmount(int $amount): self
+	{
+		return new self($this->productId, $this->unitPrice, $amount);
+	}
 
-    /**
-     * @throws AmountMustBePositiveException
-     */
-    public function add(int $amount): void
-    {
-        $this->checkAmount($amount);
-        $this->amount = $this->amount + $amount;
-    }
-
-    /**
-     * @throws AmountMustBePositiveException
-     */
-    private function checkAmount(int $amount): void
-    {
-        if ($amount <= 0) {
-            throw new AmountMustBePositiveException();
-        }
-    }
-
-    /**
-     * @throws AmountMustBePositiveException
-     */
-    public function changeAmount(int $amount): void
-    {
-        $this->checkAmount($amount);
-        $this->amount = $amount;
-    }
-
-    public function calculatePrice(): Price
-    {
-        return $this->unitPrice->multiply($this->amount);
-    }
+	public function add(int $amount): self
+	{
+		$this->checkAmount($amount);
+		return new self($this->productId, $this->unitPrice, $amount + $this->amount);
+	}
 }

@@ -2,35 +2,36 @@
 
 namespace Simara\Cart\Domain;
 
+use Simara\Cart\Domain\Detail\CartDetail;
+
 class Cart
 {
-
     /**
-     * @var Item[]
+     * @var array<string, ItemEntity>
      */
-    private $items = [];
+    private array $items = [];
 
-    public function add(string $productId, Price $unitPrice, int $amount = 1): void
+    public function add(Item $item): void
     {
         try {
-            $item = $this->find($productId);
-            $item->add($amount);
-        } catch (ProductNotInCartException $e) {
-            $this->items[] = new Item($productId, $unitPrice, $amount);
+            $itemEntity = $this->find($item->getProductId());
+            $itemEntity->add($item->getAmount());
+        } catch (ProductNotInCart) {
+            $this->items[$item->getProductId()] = new ItemEntity($item);
         }
     }
 
     /**
-     * @throws ProductNotInCartException
+     * @throws ProductNotInCart
      */
     public function remove(string $productId): void
     {
-        $key = $this->findKey($productId);
-        unset($this->items[$key]);
+    	$this->find($productId);
+        unset($this->items[$productId]);
     }
 
     /**
-     * @throws ProductNotInCartException
+     * @throws ProductNotInCart
      */
     public function changeAmount(string $productId, int $amount): void
     {
@@ -40,42 +41,27 @@ class Cart
 
     public function calculate(): CartDetail
     {
-        $detailItems = array_map(function (Item $item): ItemDetail {
-            return $item->toDetail();
+        $items = array_map(function (ItemEntity $item): Item {
+            return $item->toItem();
         }, $this->items);
 
-        $prices = array_map(function (Item $item): Price {
-            return $item->calculatePrice();
+        $prices = array_map(function (ItemEntity $item): Price {
+            return $item->toItem()->price();
         }, $this->items);
 
         $totalPrice = Price::sum($prices);
 
-        return new CartDetail(array_values($detailItems), $totalPrice);
+        return new CartDetail(array_values($items), $totalPrice);
     }
 
     /**
-     * @throws ProductNotInCartException
+     * @throws ProductNotInCart
      */
-    private function find(string $productId): Item
+    private function find(string $productId): ItemEntity
     {
-        foreach ($this->items as $item) {
-            if ($item->getProductId() === $productId) {
-                return $item;
-            }
-        }
-        throw new ProductNotInCartException();
-    }
-
-    /**
-     * @throws ProductNotInCartException
-     */
-    private function findKey(string $productId): string
-    {
-        foreach ($this->items as $key => $item) {
-            if ($item->getProductId() === $productId) {
-                return $key;
-            }
-        }
-        throw new ProductNotInCartException();
+        if (!isset($this->items[$productId])) {
+			throw new ProductNotInCart();
+		}
+        return $this->items[$productId];
     }
 }

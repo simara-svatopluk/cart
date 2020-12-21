@@ -7,36 +7,35 @@ use PHPUnit\Framework\TestCase;
 
 class PriceTest extends TestCase
 {
-
     public function testAdd()
     {
-        $a = new Price(10.0);
-        $b = new Price(0.5);
+        $a = new Price(10);
+        $b = new Price(1);
         $result = $a->add($b);
 
-        $expected = new Price(10.5);
+        $expected = new Price(11);
         Assert::assertEquals($expected, $result);
     }
 
     public function testMultiply()
     {
-        $a = new Price(10.3);
+        $a = new Price(10);
         $result = $a->multiply(2);
 
-        $expected = new Price(20.6);
+        $expected = new Price(20);
         Assert::assertEquals($expected, $result);
     }
 
     public function testSum()
     {
         $prices = [
-            new Price(9.0),
-            new Price(0.7),
-            new Price(0.3),
+            new Price(9),
+            new Price(7),
+            new Price(3),
         ];
 
         $sum = Price::sum($prices);
-        $expected = new Price(10.0);
+        $expected = new Price(19);
         Assert::assertEquals($expected, $sum);
     }
 }
