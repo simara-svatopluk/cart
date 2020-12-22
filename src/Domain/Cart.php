@@ -4,7 +4,7 @@ namespace Simara\Cart\Domain;
 
 use Simara\Cart\Domain\Detail\CartDetail;
 
-class Cart
+final class Cart
 {
     /**
      * @var array<string, ItemEntity>

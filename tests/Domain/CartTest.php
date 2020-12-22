@@ -9,7 +9,7 @@ use Simara\Cart\Domain\Detail\CartDetail;
 class CartTest extends TestCase
 {
 
-    public function testCalculateEmptyCart(): void
+    public function testCalculateEmptyCartResultsInEmptyDetail(): void
     {
         $cart = new Cart();
 
@@ -18,7 +18,7 @@ class CartTest extends TestCase
         Assert::assertEquals($expected, $cart->calculate());
     }
 
-    public function testAddSingleProductToEmpty(): void
+    public function testAddSingleProductToEmptyResultsInDetailWithSingleItem(): void
     {
         $cart = new Cart();
         $cart->add(new Item('a', new Price(10)));
@@ -29,7 +29,7 @@ class CartTest extends TestCase
         Assert::assertEquals($expected, $cart->calculate());
     }
 
-    public function testAddTwoDifferentProducts(): void
+    public function testAddTwoDifferentProductsResultsInTwoItems(): void
     {
         $cart = new Cart();
         $cart->add(new Item('a', new Price(10)));
@@ -44,7 +44,7 @@ class CartTest extends TestCase
         Assert::assertEquals($expected, $cart->calculate());
     }
 
-    public function testAddSameProductIncrementAmountOnly(): void
+    public function testAddSameProductResultsInOneItemWithHigherAmount(): void
     {
         $cart = new Cart();
         $cart->add(new Item('a', new Price(10)));
@@ -56,7 +56,7 @@ class CartTest extends TestCase
         Assert::assertEquals($expected, $cart->calculate());
     }
 
-    public function testRemoveNotExistingProductFromEmptyCart(): void
+    public function testRemoveNotExistingProductFromEmptyCartResultsInException(): void
     {
         $this->expectException(ProductNotInCart::class);
 
@@ -64,7 +64,7 @@ class CartTest extends TestCase
         $cart->remove('x');
     }
 
-    public function testRemoveNotExistingProduct(): void
+    public function testRemoveNotExistingProductResultsInException(): void
     {
         $this->expectException(ProductNotInCart::class);
 
@@ -73,7 +73,7 @@ class CartTest extends TestCase
         $cart->remove('x');
     }
 
-    public function testRemoveProduct(): void
+    public function testRemoveProductResultsInRemovedItem(): void
     {
         $cart = new Cart();
         $cart->add(new Item('a', new Price(10)));
@@ -89,7 +89,7 @@ class CartTest extends TestCase
         Assert::assertEquals($expected, $cart->calculate());
     }
 
-    public function testChangeAmountOfNotExisting(): void
+    public function testChangeAmountOfNotExistingResultsInException(): void
     {
         $this->expectException(ProductNotInCart::class);
 
@@ -99,7 +99,7 @@ class CartTest extends TestCase
         $cart->changeAmount('x', 5);
     }
 
-    public function testChangeAmount(): void
+    public function testChangeAmountResultsInTheNewAmount(): void
     {
         $cart = new Cart();
         $cart->add(new Item('a', new Price(10)));

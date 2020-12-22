@@ -6,9 +6,6 @@ class ItemEntity
 {
     private Item $item;
 
-    /**
-     * @throws AmountMustBePositive
-     */
     public function __construct(Item $item)
     {
         $this->item = $item;
