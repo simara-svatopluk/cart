@@ -3,21 +3,22 @@
 namespace Simara\Cart\Domain;
 
 use Simara\Cart\Domain\Detail\CartDetail;
+use Simara\Cart\Domain\Detail\ItemDetail;
 
 final class Cart
 {
     /**
-     * @var array<string, ItemEntity>
+     * @var array<string, Item>
      */
     private array $items = [];
 
-    public function add(Item $item): void
+    public function add(string $productId, Price $unitPrice, int $amount = 1): void
     {
         try {
-            $itemEntity = $this->find($item->getProductId());
-            $itemEntity->add($item->getAmount());
+            $itemEntity = $this->find($productId);
+            $itemEntity->add($amount);
         } catch (ProductNotInCart) {
-            $this->items[$item->getProductId()] = new ItemEntity($item);
+            $this->items[$productId] = new Item($productId, $unitPrice, $amount);
         }
     }
 
@@ -42,15 +43,15 @@ final class Cart
     public function calculate(): CartDetail
     {
         $items = array_map(
-            function (ItemEntity $item): Item {
-                return $item->toItem();
+            function (Item $item): ItemDetail {
+                return $item->toDetail();
             },
             $this->items
         );
 
         $prices = array_map(
-            function (ItemEntity $item): Price {
-                return $item->toItem()->price();
+            function (Item $item): Price {
+                return $item->price();
             },
             $this->items
         );
@@ -63,7 +64,7 @@ final class Cart
     /**
      * @throws ProductNotInCart
      */
-    private function find(string $productId): ItemEntity
+    private function find(string $productId): Item
     {
         if (!isset($this->items[$productId])) {
             throw new ProductNotInCart();

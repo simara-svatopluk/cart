@@ -2,13 +2,12 @@
 
 namespace Simara\Cart\Domain\Detail;
 
-use Simara\Cart\Domain\Item;
 use Simara\Cart\Domain\Price;
 
-class CartDetail
+final class CartDetail
 {
     /**
-     * @param $items array<int, Item>
+     * @param $items array<int, ItemDetail>
      */
     public function __construct(
         private array $items,
@@ -17,7 +16,7 @@ class CartDetail
     }
 
     /**
-     * @return array<int, Item>
+     * @return array<int, ItemDetail>
      */
     public function getItems(): array
     {

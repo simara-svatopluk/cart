@@ -2,17 +2,31 @@
 
 namespace Simara\Cart\Domain;
 
-class Item
+use Simara\Cart\Domain\Detail\ItemDetail;
+
+final class Item
 {
+    private string $productId;
+    private Price $unitPrice;
+    private int $amount;
+
     /**
      * @throws AmountMustBePositive
      */
     public function __construct(
-        private string $productId,
-        private Price $unitPrice,
-        private int $amount = 1
+        string $productId,
+        Price $unitPrice,
+        int $amount
     ) {
         $this->checkAmount($amount);
+        $this->productId = $productId;
+        $this->unitPrice = $unitPrice;
+        $this->amount = $amount;
+    }
+
+    public function toDetail(): ItemDetail
+    {
+        return new ItemDetail($this->productId, $this->unitPrice, $this->amount);
     }
 
     /**
@@ -25,34 +39,20 @@ class Item
         }
     }
 
-    public function getProductId(): string
-    {
-        return $this->productId;
-    }
-
-    public function getAmount(): int
-    {
-        return $this->amount;
-    }
-
-    public function getUnitPrice(): Price
-    {
-        return $this->unitPrice;
-    }
-
     public function price(): Price
     {
         return $this->unitPrice->multiply($this->amount);
     }
 
-    public function withAmount(int $amount): self
-    {
-        return new self($this->productId, $this->unitPrice, $amount);
-    }
-
-    public function add(int $amount): self
+    public function changeAmount(int $amount): void
     {
         $this->checkAmount($amount);
-        return new self($this->productId, $this->unitPrice, $amount + $this->amount);
+        $this->amount = $amount;
+    }
+
+    public function add(int $amount): void
+    {
+        $this->checkAmount($amount);
+        $this->amount += $amount;
     }
 }

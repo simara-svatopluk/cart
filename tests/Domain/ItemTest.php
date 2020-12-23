@@ -4,27 +4,28 @@ namespace Simara\Cart\Domain;
 
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
+use Simara\Cart\Domain\Detail\ItemDetail;
 
 class ItemTest extends TestCase
 {
     public function testAdd(): void
     {
         $item = new Item('x', new Price(5), 2);
-        $newItem = $item->add(5);
+        $item->add(5);
 
-        $expected = new Item('x', new Price(5), 7);
+        $expected = new ItemDetail('x', new Price(5), 7);
 
-        Assert::assertEquals($expected, $newItem);
+        Assert::assertEquals($expected, $item->toDetail());
     }
 
     public function testChangeAmount(): void
     {
         $item = new Item('x', new Price(5), 2);
-        $newItem = $item->withAmount(1);
+        $item->changeAmount(1);
 
-        $expected = new Item('x', new Price(5), 1);
+        $expected = new ItemDetail('x', new Price(5), 1);
 
-        Assert::assertEquals($expected, $newItem);
+        Assert::assertEquals($expected, $item->toDetail());
     }
 
     public function testInitialAmountCannotBeNegative(): void
@@ -57,13 +58,13 @@ class ItemTest extends TestCase
     {
         $this->expectException(AmountMustBePositive::class);
         $item = new Item('x', new Price(5), 1);
-        $item->withAmount(-1);
+        $item->changeAmount(-1);
     }
 
     public function testChangeToZeroThrowsException(): void
     {
         $this->expectException(AmountMustBePositive::class);
         $item = new Item('x', new Price(5), 1);
-        $item->withAmount(0);
+        $item->changeAmount(0);
     }
 }

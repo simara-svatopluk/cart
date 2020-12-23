@@ -2,7 +2,7 @@
 
 namespace Simara\Cart\Domain;
 
-class Price
+final class Price
 {
     public function __construct(private int $withVat)
     {
