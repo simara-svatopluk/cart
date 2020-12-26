@@ -27,7 +27,7 @@ final class DoctrineCartRepositoryTest extends CartRepositoryTest
         $this->entityManager->clear();
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         ConnectionManager::dropAndCreateDatabase();
         $connection = ConnectionManager::createConnection();
@@ -36,7 +36,7 @@ final class DoctrineCartRepositoryTest extends CartRepositoryTest
         parent::setUp();
     }
 
-    protected function tearDown()
+    protected function tearDown(): void
     {
         parent::tearDown();
         $this->entityManager->getConnection()->close();

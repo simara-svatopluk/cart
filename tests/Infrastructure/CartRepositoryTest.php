@@ -144,7 +144,7 @@ abstract class CartRepositoryTest extends TestCase
         );
     }
 
-    protected function setUp()
+    protected function setUp(): void
     {
         $this->repository = $this->createRepository();
     }
