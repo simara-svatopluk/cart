@@ -36,7 +36,7 @@
 			"@phpstan",
 			"@psalm"
 		],
-		"phpunit": "vendor/bin/phpunit tests",
+		"phpunit": "vendor/bin/phpunit",
 		"phpcs": "vendor/bin/phpcs --standard=PSR12 src tests",
 		"phpstan": "vendor/bin/phpstan.phar analyse --level=max src tests",
 		"psalm": "vendor/bin/psalm.phar"

@@ -13,6 +13,10 @@ use Doctrine\ORM\Tools\SchemaTool;
 
 final class EntityManagerFactory
 {
+    /**
+     * @param array<string> $schemaClassNames
+     * @param array<class-string<\Doctrine\DBAL\Types\Type>, string> $types
+     */
     public static function createEntityManager(
         Connection $connection,
         array $schemaClassNames,
@@ -43,7 +47,10 @@ final class EntityManagerFactory
         return $entityManager;
     }
 
-    private static function registerType(AbstractPlatform $platform, string $class, string $name)
+    /**
+     * @param class-string<\Doctrine\DBAL\Types\Type> $class
+     */
+    private static function registerType(AbstractPlatform $platform, string $class, string $name): void
     {
         if (!Type::hasType($name)) {
             Type::addType($name, $class);

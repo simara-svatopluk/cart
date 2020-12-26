@@ -127,6 +127,9 @@ final class CartTest extends TestCase
         return new ConstantPrices(new Price($price));
     }
 
+    /**
+     * @param array<string, Price> $prices
+     */
     private function createStaticPrices(array $prices): Prices
     {
         return new StaticPrices($prices);

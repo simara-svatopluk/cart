@@ -18,7 +18,10 @@ final class CsvPricesTest extends TestCase
         $this->assertEquals($expected, $actual);
     }
 
-    public function successTestCases(): \Traversable
+    /**
+     * @return \Generator<array<string|Price>>
+     */
+    public function successTestCases(): \Generator
     {
         yield ['p12345', new Price('50.0')];
         yield ['p54321', new Price('100.10')];

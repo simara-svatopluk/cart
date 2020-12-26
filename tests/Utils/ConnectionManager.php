@@ -55,6 +55,8 @@ final class ConnectionManager
         if ($GLOBALS['DB_DRIVER'] === 'pdo_mysql') {
             return new MySqlDriver();
         }
+
+        throw new Exception('Driver not supported');
     }
 
     private static function getDbName(): ?string

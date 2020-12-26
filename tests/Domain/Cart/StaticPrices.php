@@ -14,6 +14,9 @@ final class StaticPrices implements Prices
      */
     private array $prices;
 
+    /**
+     * @param array<string, Price> $prices
+     */
     public function __construct($prices)
     {
         $this->prices = $prices;

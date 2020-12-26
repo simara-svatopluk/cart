@@ -43,21 +43,22 @@ final class PriceTest extends TestCase
     /**
      * @dataProvider getterTestCases
      */
-    public function testGetter(string $converted, string $expected)
+    public function testGetter(string $converted, string $expected): void
     {
         $price = new Price($converted);
         $this->assertSame($expected, $price->getWithVat());
     }
 
-    public function getterTestCases(): array
+    /**
+     * @return \Generator<string[]>
+     */
+    public function getterTestCases(): \Generator
     {
-        return [
-            ["0.005", "0.00"],
-            ["0.05" , "0.05"],
-            ["0.5"  , "0.50"],
-            ["0"    , "0.00"],
-            ["5"    , "5.00"],
-            ["5.555", "5.55"],
-        ];
+        yield ["0.005", "0.00"];
+        yield ["0.05", "0.05"];
+        yield ["0.5", "0.50"];
+        yield ["0", "0.00"];
+        yield ["5", "5.00"];
+        yield ["5.555", "5.55"];
     }
 }
