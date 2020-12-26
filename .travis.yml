@@ -2,10 +2,14 @@ language: php
 
 php:
     - 8.0
-
+services:
+    - postgresql
 install:
     - composer install
+before_script:
+    - psql -c 'create database cart_test;' -U postgres
 script:
     - composer phpcs
     - composer phpstan
     - composer psalm
+    - composer phpunit

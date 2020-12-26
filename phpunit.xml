@@ -1,15 +1,15 @@
 <phpunit bootstrap="vendor/autoload.php">
 	<php>
 		<var name="DB_DRIVER" value="pdo_pgsql" />
-		<var name="DB_USER" value="scrutinizer" />
-		<var name="DB_PASSWORD" value="scrutinizer" />
+		<var name="DB_USER" value="postgres" />
+		<var name="DB_PASSWORD" value="" />
 		<var name="DB_DBNAME" value="cart_test" />
 		<var name="DB_HOST" value="localhost" />
 		<env name="XDEBUG_MODE" value="coverage" />
 	</php>
 	<testsuites>
 		<testsuite name="Cart">
-			<directory>tests/Domain</directory>
+			<directory>tests</directory>
 		</testsuite>
 	</testsuites>
 	<filter>
