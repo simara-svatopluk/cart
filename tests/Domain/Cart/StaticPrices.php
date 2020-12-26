@@ -10,16 +10,10 @@ use Simara\Cart\Domain\Prices\Prices;
 final class StaticPrices implements Prices
 {
     /**
-     * @var array<string, Price>
-     */
-    private array $prices;
-
-    /**
      * @param array<string, Price> $prices
      */
-    public function __construct($prices)
+    public function __construct(private array $prices)
     {
-        $this->prices = $prices;
     }
 
     public function unitPrice(string $productId): Price

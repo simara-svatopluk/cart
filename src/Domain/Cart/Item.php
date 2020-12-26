@@ -9,18 +9,14 @@ final class Item
 {
     private int $generatedId;
 
-    private string $productId;
-
-    private int $amount;
-
     /**
      * @throws AmountMustBePositiveException
      */
-    public function __construct(string $productId, int $amount)
-    {
+    public function __construct(
+        private string $productId,
+        private int $amount
+    ) {
         $this->checkAmount($amount);
-        $this->productId = $productId;
-        $this->amount = $amount;
     }
 
     public function toDetail(Prices $prices): ItemDetail

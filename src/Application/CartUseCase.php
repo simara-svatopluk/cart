@@ -12,14 +12,10 @@ use Simara\Cart\Domain\Prices\Prices;
 
 final class CartUseCase
 {
-    private CartRepository $repository;
-
-    private Prices $prices;
-
-    public function __construct(CartRepository $repository, Prices $prices)
-    {
-        $this->repository = $repository;
-        $this->prices = $prices;
+    public function __construct(
+        private CartRepository $repository,
+        private Prices $prices
+    ) {
     }
 
     public function add(string $cartId, string $productId, int $amount): void

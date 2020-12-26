@@ -2,6 +2,7 @@
 
 namespace Simara\Cart\Domain;
 
+use Generator;
 use PHPUnit\Framework\Assert;
 use PHPUnit\Framework\TestCase;
 
@@ -50,9 +51,9 @@ final class PriceTest extends TestCase
     }
 
     /**
-     * @return \Generator<string[]>
+     * @return Generator<string[]>
      */
-    public function getterTestCases(): \Generator
+    public function getterTestCases(): Generator
     {
         yield ["0.005", "0.00"];
         yield ["0.05", "0.05"];

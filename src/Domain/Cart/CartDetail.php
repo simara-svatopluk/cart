@@ -7,19 +7,12 @@ use Simara\Cart\Domain\Price;
 final class CartDetail
 {
     /**
-     * @var ItemDetail[]
-     */
-    private array $items;
-
-    private Price $totalPrice;
-
-    /**
      * @param ItemDetail[] $items
      */
-    public function __construct(array $items, Price $totalPrice)
-    {
-        $this->items = $items;
-        $this->totalPrice = $totalPrice;
+    public function __construct(
+        private array $items,
+        private Price $totalPrice
+    ) {
     }
 
     /**

@@ -6,17 +6,12 @@ use Simara\Cart\Domain\Price;
 
 final class ItemDetail
 {
-    private string $productId;
 
-    private Price $price;
-
-    private int $amount;
-
-    public function __construct(string $productId, Price $price, int $amount)
-    {
-        $this->productId = $productId;
-        $this->amount = $amount;
-        $this->price = $price;
+    public function __construct(
+        private string $productId,
+        private Price $price,
+        private int $amount
+    ) {
     }
 
     public function getProductId(): string

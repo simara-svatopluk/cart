@@ -7,8 +7,6 @@ use PHPUnit\Framework\Assert;
 use Simara\Cart\Domain\Cart\Cart;
 use Simara\Cart\Domain\Cart\CartRepository;
 use Simara\Cart\Domain\Cart\Item;
-use Simara\Cart\Domain\Price;
-use Simara\Cart\Infrastructure\DoctrineMapping\PriceType;
 use Simara\Cart\Utils\EntityManagerFactory;
 use Simara\Cart\Utils\ConnectionManager;
 

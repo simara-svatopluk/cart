@@ -9,16 +9,13 @@ use Simara\Cart\Domain\Prices\Prices;
 
 final class Cart
 {
-    private string $id;
-
     /**
      * @var Collection<int, Item>
      */
     private $items;
 
-    public function __construct(string $id)
+    public function __construct(private string $id)
     {
-        $this->id = $id;
         $this->items = new ArrayCollection();
     }
 
@@ -27,7 +24,7 @@ final class Cart
         try {
             $item = $this->find($productId);
             $item->add($amount);
-        } catch (ProductNotInCartException $e) {
+        } catch (ProductNotInCartException) {
             $this->items->add(new Item($productId, $amount));
         }
     }

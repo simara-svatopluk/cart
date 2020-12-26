@@ -9,11 +9,8 @@ use Simara\Cart\Domain\Prices\Prices;
 
 final class ConstantPrices implements Prices
 {
-    private Price $price;
-
-    public function __construct(Price $price)
+    public function __construct(private Price $price)
     {
-        $this->price = $price;
     }
 
     public function unitPrice(string $productId): Price

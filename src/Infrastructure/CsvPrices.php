@@ -8,40 +8,40 @@ use Simara\Cart\Domain\Price;
 use Simara\Cart\Domain\Prices\PriceNotFoundException;
 use Simara\Cart\Domain\Prices\Prices;
 
+use function fopen;
+use function is_resource;
+
 final class CsvPrices implements Prices
 {
-    private string $filename;
 
     /**
-     * @var Price[]|array<string, Price>
+     * @var array<string, Price>
      */
     private array $prices = [];
 
-    public function __construct(string $filename)
+    public function __construct(private string $filename)
     {
-        $this->filename = $filename;
     }
 
     public function unitPrice(string $productId): Price
     {
         $this->loadPrices();
-        if (!isset($this->prices[$productId])) {
-            throw new PriceNotFoundException();
-        }
-        return $this->prices[$productId];
+        return $this->prices[$productId] ?? throw new PriceNotFoundException();
     }
 
     private function loadPrices(): void
     {
-        if ($this->prices === []) {
-            $handle = \fopen($this->filename, 'r');
-            assert(\is_resource($handle));
-            while (($data = fgetcsv($handle, 1000, ",")) !== false) {
-                $id = $data[0];
-                $price = new Price($data[1]);
-                $this->prices[$id] = $price;
-            }
-            fclose($handle);
+        if ($this->prices !== []) {
+            return;
         }
+
+        $handle = fopen($this->filename, 'r');
+        assert(is_resource($handle));
+        while (($data = fgetcsv($handle, 1000, ",")) !== false) {
+            $id = $data[0];
+            $price = new Price($data[1]);
+            $this->prices[$id] = $price;
+        }
+        fclose($handle);
     }
 }

@@ -9,13 +9,12 @@ use Simara\Cart\Domain\Cart\CartNotFoundException;
 use Simara\Cart\Domain\Cart\CartRepository;
 use TypeError;
 
+use function assert;
+
 final class DoctrineCartRepository implements CartRepository
 {
-    private EntityManager $entityManger;
-
-    public function __construct(EntityManager $entityManger)
+    public function __construct(private EntityManager $entityManger)
     {
-        $this->entityManger = $entityManger;
     }
 
     public function add(Cart $cart): void
@@ -37,9 +36,9 @@ final class DoctrineCartRepository implements CartRepository
 
         try {
             $cart = $query->getSingleResult();
-            \assert($cart instanceof Cart);
+            assert($cart instanceof Cart);
             return $cart;
-        } catch (NoResultException $e) {
+        } catch (NoResultException) {
             throw new CartNotFoundException();
         }
     }

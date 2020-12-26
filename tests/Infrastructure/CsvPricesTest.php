@@ -2,6 +2,7 @@
 
 namespace Simara\Cart\Infrastructure;
 
+use Generator;
 use PHPUnit\Framework\TestCase;
 use Simara\Cart\Domain\Price;
 use Simara\Cart\Domain\Prices\PriceNotFoundException;
@@ -19,9 +20,9 @@ final class CsvPricesTest extends TestCase
     }
 
     /**
-     * @return \Generator<array<string|Price>>
+     * @return Generator<array<string|Price>>
      */
-    public function successTestCases(): \Generator
+    public function successTestCases(): Generator
     {
         yield ['p12345', new Price('50.0')];
         yield ['p54321', new Price('100.10')];
