@@ -43,16 +43,12 @@ final class Cart
     public function calculate(): CartDetail
     {
         $items = array_map(
-            function (Item $item): ItemDetail {
-                return $item->toDetail();
-            },
+            fn(Item $item): ItemDetail => $item->toDetail(),
             $this->items
         );
 
         $prices = array_map(
-            function (Item $item): Price {
-                return $item->price();
-            },
+            fn(Item $item): Price => $item->price(),
             $this->items
         );
 
@@ -66,9 +62,6 @@ final class Cart
      */
     private function find(string $productId): Item
     {
-        if (!isset($this->items[$productId])) {
-            throw new ProductNotInCart();
-        }
-        return $this->items[$productId];
+        return $this->items[$productId] ?? throw new ProductNotInCart();
     }
 }

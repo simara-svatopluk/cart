@@ -16,9 +16,7 @@ final class Price
     {
         return array_reduce(
             $prices,
-            function (self $carry, self $price) {
-                return $carry->add($price);
-            },
+            fn (self $carry, self $price): self => $carry->add($price),
             new self(0)
         );
     }
