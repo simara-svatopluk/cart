@@ -1,12 +1,22 @@
 build:
     environment:
-            php: 8.0.0
+            php:
+                version: 8.0.0
             postgresql: true
     tests:
         override:
             -
-                command: 'vendor/bin/phpunit --coverage-clover=some-file'
-                coverage:
-                    file: 'some-file'
-                    format: 'clover'
+                command: 'vendor/bin/phpunit tests/Domain'
 
+    nodes:
+        analysis:
+            dependencies:
+                after:
+                    - composer require --dev squizlabs/php_codesniffer:4.0.x-dev
+
+            tests:
+                override:
+                    -
+                        command: phpcs-run --standard=PSR12 src tests
+                        use_website_config: false
+                    - php-scrutinizer-run

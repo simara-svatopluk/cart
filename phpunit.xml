@@ -5,10 +5,11 @@
 		<var name="DB_PASSWORD" value="scrutinizer" />
 		<var name="DB_DBNAME" value="cart_test" />
 		<var name="DB_HOST" value="localhost" />
+		<env name="XDEBUG_MODE" value="coverage" />
 	</php>
 	<testsuites>
 		<testsuite name="Cart">
-			<directory>tests</directory>
+			<directory>tests/Domain</directory>
 		</testsuite>
 	</testsuites>
 	<filter>
