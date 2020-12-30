@@ -10,7 +10,7 @@ use Simara\Cart\Domain\Prices\Prices;
 final class Cart
 {
     /**
-     * @var Collection<int, Item>
+     * @var Collection<string, Item>
      */
     private $items;
 
@@ -25,7 +25,7 @@ final class Cart
             $item = $this->find($productId);
             $item->add($amount);
         } catch (ProductNotInCartException) {
-            $this->items->add(new Item($productId, $amount));
+            $this->items->set($productId, new Item($productId, $amount));
         }
     }
 
@@ -34,8 +34,7 @@ final class Cart
      */
     public function remove(string $productId): void
     {
-        $key = $this->findKey($productId);
-        $this->items->remove($key);
+        $this->items->remove($productId);
     }
 
     /**
@@ -63,23 +62,10 @@ final class Cart
      */
     private function find(string $productId): Item
     {
-        foreach ($this->items as $item) {
-            if ($item->getProductId() === $productId) {
-                return $item;
-            }
-        }
-        throw new ProductNotInCartException();
-    }
+        $item = $this->items->get($productId);
 
-    /**
-     * @throws ProductNotInCartException
-     */
-    private function findKey(string $productId): int
-    {
-        foreach ($this->items as $key => $item) {
-            if ($item->getProductId() === $productId) {
-                return $key;
-            }
+        if ($item instanceof Item) {
+            return $item;
         }
         throw new ProductNotInCartException();
     }
