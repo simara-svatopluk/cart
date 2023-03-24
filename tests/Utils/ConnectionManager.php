@@ -4,9 +4,9 @@ namespace Simara\Cart\Utils;
 
 use Doctrine\DBAL\Connection;
 use Doctrine\DBAL\Driver;
-use Doctrine\DBAL\Driver\PDOPgSql\Driver as PgSqlDriver;
-use Doctrine\DBAL\Driver\PDOMySql\Driver as MySqlDriver;
-use Doctrine\DBAL\Driver\PDOSqlite\Driver as SqliteDriver;
+use Doctrine\DBAL\Driver\PDO\PgSQL\Driver as PgSqlDriver;
+use Doctrine\DBAL\Driver\PDO\MySQL\Driver as MySqlDriver;
+use Doctrine\DBAL\Driver\PDO\SQLite\Driver as SqliteDriver;
 use Exception;
 
 final class ConnectionManager
