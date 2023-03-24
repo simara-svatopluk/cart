@@ -37,7 +37,7 @@ If you don't know how, you can find inspiration in [`DependenciesTest`](tests/Ap
 
 We can use domain objects directly in UI/CLI/target layer, and then we have to pass objects like [`Repositories`](src/Domain/Cart/CartRepository.php) to that layer.
 Or we can wrap domain objects into classes that represent full use-cases.
-You may call them handlers/facades/[`useCases`](src/Application/CartUseCase.php)/... depending on the project infrastructure.
+You may call them handlers/facades/[`useCases`](src/Application/CartUseCaseApplication.php)/... depending on the project infrastructure.
 
 ## TDD
 

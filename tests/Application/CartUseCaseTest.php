@@ -11,7 +11,7 @@ use Simara\Cart\Infrastructure\MemoryCartRepository;
 
 final class CartUseCaseTest extends TestCase
 {
-    private CartUseCase $useCase;
+    private CartUseCaseApplication $useCase;
 
     public function testFullScenarioSuccess(): void
     {
@@ -27,7 +27,7 @@ final class CartUseCaseTest extends TestCase
     {
         parent::setUp();
 
-        $this->useCase = new CartUseCase(
+        $this->useCase = new CartUseCaseApplication(
             new MemoryCartRepository(),
             new StaticPrices([
                 'p1' => new Price('10.0'),

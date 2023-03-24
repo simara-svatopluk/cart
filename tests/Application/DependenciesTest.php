@@ -24,9 +24,9 @@ final class DependenciesTest extends TestCase
         $repository = new DoctrineCartRepository($entityManager);
         $prices = new CsvPrices('/dev/null');
 
-        $useCase = new CartUseCase($repository, $prices);
+        $useCase = new CartUseCaseApplication($repository, $prices);
 
-        $this->assertInstanceOf(CartUseCase::class, $useCase);
+        $this->assertInstanceOf(CartUseCaseApplication::class, $useCase);
         $connection->close();
     }
 }
