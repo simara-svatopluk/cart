@@ -8,5 +8,4 @@ use DomainException;
 
 final class PriceNotFoundException extends DomainException
 {
-
 }

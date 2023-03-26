@@ -6,7 +6,6 @@ use Simara\Cart\Domain\Price;
 
 final class ItemDetail
 {
-
     public function __construct(
         private string $productId,
         private Price $price,

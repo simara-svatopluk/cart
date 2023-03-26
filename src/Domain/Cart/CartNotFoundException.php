@@ -6,5 +6,4 @@ use DomainException;
 
 final class CartNotFoundException extends DomainException
 {
-
 }

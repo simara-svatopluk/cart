@@ -13,7 +13,6 @@ use function is_resource;
 
 final class CsvPrices implements Prices
 {
-
     /**
      * @var array<string, Price>
      */

@@ -9,7 +9,6 @@ use Simara\Cart\Domain\Prices\Prices;
 
 final class CartTest extends TestCase
 {
-
     public function testCalculateEmptyCart(): void
     {
         $cart = new Cart('1');

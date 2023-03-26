@@ -4,7 +4,6 @@ namespace Simara\Cart\Domain\Cart;
 
 interface CartRepository
 {
-
     public function add(Cart $cart): void;
 
     /**

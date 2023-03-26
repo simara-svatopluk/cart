@@ -8,7 +8,6 @@ use PHPUnit\Framework\TestCase;
 
 final class PriceTest extends TestCase
 {
-
     public function testAdd(): void
     {
         $a = new Price("10.0");

@@ -13,7 +13,6 @@ use Simara\Cart\Domain\Prices\Prices;
 
 final class ItemTest extends TestCase
 {
-
     public function testToDetail(): void
     {
         $item = new Item('x', 2);

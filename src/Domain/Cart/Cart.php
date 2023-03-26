@@ -55,7 +55,7 @@ final class Cart
 
         $totalPrice = Price::sum($itemPrices);
 
-        return new CartDetail(array_values($detailItems), $totalPrice);
+        return new CartDetail($detailItems, $totalPrice);
     }
 
     /**
