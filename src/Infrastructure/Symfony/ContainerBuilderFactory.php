@@ -12,7 +12,7 @@ use Simara\Cart\Infrastructure\CsvPrices;
 use Simara\Cart\Infrastructure\MemoryCartRepository;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 
-class ContainerBuilderFactory
+final class ContainerBuilderFactory
 {
     public static function create(
         string $pricesCsvPath,
