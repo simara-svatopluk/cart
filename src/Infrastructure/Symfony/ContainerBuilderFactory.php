@@ -14,9 +14,10 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class ContainerBuilderFactory
 {
-    public static function create(
+    public static function createInMemory(
         string $pricesCsvPath,
-    ): ContainerBuilder {
+    ): ContainerBuilder
+    {
         $containerBuilder = new ContainerBuilder();
 
         $containerBuilder

@@ -29,15 +29,22 @@ If it is the project use-case, check out [fixed-prices version](https://github.c
 
 ## How to Assemble Real Application
 
+### Demo
+
+Take a loot at [`app.php`](example/app.php)
+
+### Longer explanation
+
 We have to implement domain interfaces by our infrastructure, eg. if we use Doctrine, we implement [`DoctrineRepository`](src/Infrastructure/DoctrineCartRepository.php),
 if we use CSV for storing pricing, we implement [`CsvPrices`](src/Infrastructure/CsvPrices.php) and so on by the project needs.
-
-Then we register these classes in or favorite DI container.
-If you don't know how, you can find inspiration in [`DependenciesTest`](tests/Application/DependenciesTest.php).
 
 We can use domain objects directly in UI/CLI/target layer, and then we have to pass objects like [`Repositories`](src/Domain/Cart/CartRepository.php) to that layer.
 Or we can wrap domain objects into classes that represent full use-cases.
 You may call them handlers/facades/[`useCases`](src/Application/CartUseCaseApplication.php)/... depending on the project infrastructure.
+
+Then we register these classes in or favorite DI container.
+If you don't know how, you can find inspiration that uses Symfony/DI [`ContainerBuilderFactory`](src/Infrastructure/Symfony/ContainerBuilderFactory.php).
+
 
 ## TDD
 

@@ -6,11 +6,11 @@ use PHPUnit\Framework\TestCase;
 use Simara\Cart\Application\CartUseCase;
 use Simara\Cart\Infrastructure\Symfony\ContainerBuilderFactory;
 
-final class ContainerBuilderFactoryTest extends TestCase
+final class DependenciesTest extends TestCase
 {
     public function testUseCaseCanBeObtained()
     {
-        $containerBuilder = ContainerBuilderFactory::create(
+        $containerBuilder = ContainerBuilderFactory::createInMemory(
             pricesCsvPath: __DIR__ . '/fixtures/prices.csv'
         );
 
