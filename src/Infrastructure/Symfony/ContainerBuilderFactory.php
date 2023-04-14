@@ -21,27 +21,6 @@ use Symfony\Component\DependencyInjection\ContainerBuilder;
 
 final class ContainerBuilderFactory
 {
-    public static function createInMemory(
-        string $pricesCsvPath,
-    ): ContainerBuilder {
-        $containerBuilder = new ContainerBuilder();
-
-        $containerBuilder
-            ->register(CartRepository::class, MemoryCartRepository::class);
-
-        $containerBuilder
-            ->register(Prices::class, CsvPrices::class)
-            ->addArgument($pricesCsvPath);
-
-        $containerBuilder
-            ->register(CartUseCase::class, CartUseCaseApplication::class)
-            ->setAutowired(true)
-            ->setPublic(true);
-
-        $containerBuilder->compile();
-
-        return $containerBuilder;
-    }
     public static function create(
         string $pricesCsvPath,
     ): ContainerBuilder {
@@ -61,6 +40,28 @@ final class ContainerBuilderFactory
         $containerBuilder
             ->register(CartRepository::class, DoctrineCartRepository::class)
             ->setAutowired(true);
+
+        $containerBuilder
+            ->register(Prices::class, CsvPrices::class)
+            ->addArgument($pricesCsvPath);
+
+        $containerBuilder
+            ->register(CartUseCase::class, CartUseCaseApplication::class)
+            ->setAutowired(true)
+            ->setPublic(true);
+
+        $containerBuilder->compile();
+
+        return $containerBuilder;
+    }
+
+    public static function createInMemory(
+        string $pricesCsvPath,
+    ): ContainerBuilder {
+        $containerBuilder = new ContainerBuilder();
+
+        $containerBuilder
+            ->register(CartRepository::class, MemoryCartRepository::class);
 
         $containerBuilder
             ->register(Prices::class, CsvPrices::class)
